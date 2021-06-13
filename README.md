@@ -4,7 +4,7 @@ A group project
 
 ## Week 1
 
-The data was cleaned and exported to this csv file by Tamar.  I am currently reading the data from the file rather than the database because we are still working on getting the data in a database.
+The data was cleaned and exported to this csv file ( https://drive.google.com/file/d/1gEXXLB23iYxTxxyPFyhmQ-dfvjoEhTOl/view?usp=sharing ) by Tamar.  I am currently reading the data from the file rather than the database because we are still working on getting the data in a database.
 
 I read in the file and stored the data in an array, then removed the header.  I wanted to clean up the data for better processing, so I removed “stop words” which are words that do not add a lot of meaning to the content such as words like “the”, “in”, “at”, etc.  I also normalized the data by converting everything to lowercase.
 
