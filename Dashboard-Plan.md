@@ -2,7 +2,7 @@
 
 1. Analysis of distribution of positive and negative reviews based on number words in review (TRAINING SET versus PREDICTION SET;  number of words (x-axis) vs number of positive reviews)
 
-![](/Resources/distribution-based-on-number-words.PNG)
+![](/Resources/distribution-based-on-number-words.png)
 
 2. Positive / negative reviews by product
 
