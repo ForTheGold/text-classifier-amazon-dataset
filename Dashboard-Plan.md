@@ -9,7 +9,8 @@
 
 3. Positive and negative reviews by date – progression in time of sentiment
 4. Plot of products with the most negative and positive reviews.
-5. N-grams to show the most frequently used words (tokens) in positive and negative reviews.
+5. N-grams to show the most frequently used words (tokens) in positive and negative reviews (compare TRAINING SET versus PREDICTION SET).
 
 ![](/Resources/treemap.PNG)
 
+![](/Resources/bubble-chart.PNG)
