@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect
-from app.forms import InputForm
-from app import app
+from dash.forms import InputForm
+from dash import app
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/home', methods=['GET', 'POST'])
