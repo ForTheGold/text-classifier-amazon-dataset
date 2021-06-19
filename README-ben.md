@@ -50,5 +50,13 @@ Next I tokenized the data which means splitting it by word and then created a li
 
 I then shuffled up the positive reviews for randomness and included the same number of positive and negative reviews in one giant list.  I then shuffled this giant list which contains 809,640 items half of which are positive and half of which are negative reviews.  We can see some of the list items in the file.
 
-I plan to use a bag of words model with a Naive Bayes classifier for starters in order to classify the texts.  We will see what kind of accuracy we can get with that type of model.  We are going to scrape some data about fake meat products to classify as either positive or negative.
+Week 2
+
+I am using the presence or absence of the 3000 most common words that appear in the reviews as the features to classify the text.  Obviously this is far too many reviews for that to be processed on a standard computer, so I am using 2000 reviews total, 1000 of which are positive and 1000 of which are negative.  These 2000 reviews are shuffled again and then split into a dictionary list of the 3000 most common words in all of the reviews.
+
+The dictionary contains a True value if the review contains the given word and a False value if the review does not contain the word.  I am using a Naive Bayes Classifier on this data as the machine learning model.  With the train and test split data, we can see that we are getting about 75% accuracy which is not bad at all.  This split is done with a built in function of NLTK.  The next step is to start classifying some real data.
+
+The limitations of this approach are firstly that we are only using the most common 3000 words in these reviews.  It may be the case that some of the most common words are not predictive features in terms of sentiment.  It may also be the case that there are highly predictive words in some of the reviews that are not common in all reviews which if included may give us a much more accurate classification for those reviews.
+
+Additionally, I chose the Naive Bayes Classifier because it give decent accuracy without requiring too much processing power.  It may also be the case that a different algorithm would be more highly predictive.
 
