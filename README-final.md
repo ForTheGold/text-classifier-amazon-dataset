@@ -52,3 +52,6 @@ I then shuffled up the positive reviews for randomness and included the same num
 
 I plan to use a bag of words model with a Naive Bayes classifier for starters in order to classify the texts.  We will see what kind of accuracy we can get with that type of model.  We are going to scrape some data about fake meat products to classify as either positive or negative.
 
+
+### Week 2
+We conintued to clean and organize the data set to finalize the machine learning process.  We also started working on the two dashboards we plan to create. One will show the static information regarding the correlation between months/years and ratings. We also will have an interactive site that will allow a user to input review words to populate the anticipated positive or negative rating.  We also have started working on the graphics of the dashboard and the powerpoint slides.
