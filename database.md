@@ -15,3 +15,6 @@ https://drive.google.com/file/d/1QFqJMKHAxnhfl3FOZBy1ZY2wjpn_7YAw/view?usp=shari
 
 csv file with 1 and 5 star ratings with review text, review length, time reviewer id:
 https://drive.google.com/file/d/1Sp1hZ6GKqPVKF9W2qp3O0rmTO9CSaweB/view?usp=sharing
+
+image of database in table plus:
+![groceriesALL_table.PNG](Resources/groceriesALL_table.PNG)
