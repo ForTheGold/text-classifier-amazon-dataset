@@ -1,4 +1,4 @@
-# Artificial Meat Review Predictions - Deliverable One
+# Artificial Meat Review Predictions - Deliverable One & Two
 
 This is a group project by Tamar Brand-Perez, Tiffany Price, Ben Tubbs, and Jose Santos.
 ## Topic
@@ -12,3 +12,6 @@ Our data set was pulled from the Amazon Grocery and Gourmet Food section (http:/
 
 ## Goals
 We would like to have a successful model that predicts ratings based upon the analyzed reviews. Upon having ratings predicted based on the reviews through NLP, we believe this analysis will help artificial meat producers understand how reviews will impact ratings and have a potential impact on thier popularity and future sales.
+
+## Progress
+Our team meets at least three times per week and touches base regularly. We have found a productive cadence around roles and responsibilties and are continuing to make progress toward the final product.
