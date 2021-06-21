@@ -9,6 +9,8 @@ The merged dataframes had many Nan's. Dropping them made it clear that there was
 - Creating database: sqlite and sqlalchemy were used to create a database. Database accessed with python and also using table plus. One of the features of sqlalchemy is ORM=object relational mapper which allows creation of a decoupled system. We can access each class independently without it affecting the other parts of the system. Class = table. Our initial data structure is one table for the visuals and one for the machine learning code as mentioned above. sqlite enables fast retrieval of information that is stored locally. To avoid paying subscription for sharing the database on a server we are using a locally stored database. The speed of retrieval would be particularly important for web applications. For our purpose, using nrows=10 when testing the code was a appropriate for the inital steps. Then the sqlite database was created to allow further manipulations.   
   One part of our project uses dynamic data. That is where you input a review and the machine learning model evaluates it and decides whether it is positive or negative. 
 
+- added a second table to the database for the machine learning model to connect to it instead of using the csv file. Table name: groceriesMLData.
+
 Links to the data:
 sqlite dataset includes 1 and 5 star ratings with review text as well as review length, time, reviewer id:
 https://drive.google.com/file/d/1QFqJMKHAxnhfl3FOZBy1ZY2wjpn_7YAw/view?usp=sharing
@@ -16,5 +18,25 @@ https://drive.google.com/file/d/1QFqJMKHAxnhfl3FOZBy1ZY2wjpn_7YAw/view?usp=shari
 csv file with 1 and 5 star ratings with review text, review length, time reviewer id:
 https://drive.google.com/file/d/1Sp1hZ6GKqPVKF9W2qp3O0rmTO9CSaweB/view?usp=sharing
 
-image of database in table plus:
+images of database in table plus:
 ![groceriesALL_table.PNG](Resources/groceriesALL_table.PNG)
+
+![MLtable.PNG](Resources/MLtable.PNG)
+
+database deliverables week 2:
+Team members present a fully integrated
+database.
+✓ Database stores static data for use
+during the project ✓ Database interfaces with the project in
+some format (e.g., scraping updates the
+database, or database connects to the
+model) ✓ Includes at least two tables (or
+collections, if using MongoDB) ✓ Includes at least one join using the
+database language (not including any
+joins in Pandas) ✓ Includes at least one connection string
+(using SQLAlchemy or PyMongo)
+Note: If you use a SQL database, you
+must provide your ERD with relationships
+
+
+
