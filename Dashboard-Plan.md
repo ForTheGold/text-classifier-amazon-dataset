@@ -1,4 +1,4 @@
-# Possible Visualizations in Dashboard
+# Week 1 - Possible Visualizations in Dashboard
 
 1. Analysis of distribution of positive and negative reviews based on number words in review (TRAINING SET versus PREDICTION SET;  number of words (x-axis) vs number of positive reviews)
 
@@ -22,3 +22,16 @@ https://medium.com/plotly/nlp-visualisations-for-clear-immediate-insights-into-t
 
 ![](/Resources/bubble-chart.PNG)
 https://medium.com/plotly/nlp-visualisations-for-clear-immediate-insights-into-text-data-and-outputs-9ebfab168d5b
+
+# Week 2 - Dashboard Template
+
+Agreed to a template for the dashboard that would show the comparison of two brands of fake meat products, selected from the drop down menu.  The 2 slide dashboard shall contain the following graphics:
+
+First a comparison of the word frequence used to describe reviews that are predicted to be positive, and those that are negative:
+
+![](/Resources/Dashboard-1.PNG)
+
+then a slide showing how the sentiment for the brand changes with time by depicting the number of positive reviews (upward bar) and negative reviews (downward bar)
+
+![](/Resources/Dashboard-2.PNG)
+
