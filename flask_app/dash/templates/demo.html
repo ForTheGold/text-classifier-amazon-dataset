@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+	<div class="container">
+		<div class="jumbotron">
+			<h1>Text Classification Demo</h1>
+			<p>This is a site that demostrates an algorithm we built that classifies text as either positive or negative.</p>
+		</div>
+		<form method="POST" action="">
+			{{ form.hidden_tag() }}
+			<span>{{ form.user_review.label() }}</span><br />
+			{{ form.user_review(rows="10", cols="100") }}
+
+			{% if form.user_review.errors %}
+				{% for error in form.user_review.errors %}
+				 {{ error }}
+				{% endfor %}
+			{% endif %}
+
+			<br /> <br />
+			{{ form.submit() }}
+		</form>
+		{% with messages=get_flashed_messages(with_categories=true) %}
+			{% if messages %}
+				{% for category, message in messages %}
+					<div class="{{ category }}">{{ message }}</div>
+				{% endfor %}
+			{% endif %}
+		{% endwith %}
+	</div>
+{% endblock content %}
