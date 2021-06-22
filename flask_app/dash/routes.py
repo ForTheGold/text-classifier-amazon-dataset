@@ -1,7 +1,9 @@
 from flask import render_template, url_for, flash, redirect, Markup
 from dash.forms import InputForm
 from dash import app
-from dash.mlmodel import make_training_feature_set, find_features, train_classifier, text_to_feature_set, classify_text
+from dash.mlmodel import *
+
+messages = []
 
 @app.route('/')
 @app.route('/project')
@@ -41,10 +43,11 @@ def demo():
 			classification = "positive"
 		else:
 			classification = "negative"
-		message = Markup(f"<h3>You typed: { form.user_review.data }! <br /> This was classified as a <strong>{ classification }</strong> review.</h3>")
-		flash(message, "CLASS_NAME")
+		messages.append((form.user_review.data, classification))
+		#message = Markup(f"<h3>You typed: { form.user_review.data }! <br /> This was classified as a <strong>{ classification }</strong> review.</h3>")
+		#flash(message, "CLASS_NAME")
 		return redirect(url_for('demo'))
-	return render_template('demo.html', title='Demo', form=form)
+	return render_template('demo.html', title='Demo', form=form, messages=messages)
 
 @app.route('/visualizations')
 def visualizations():

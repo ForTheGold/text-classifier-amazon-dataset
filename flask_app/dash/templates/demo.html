@@ -7,8 +7,12 @@
 		</div>
 		<form method="POST" action="">
 			{{ form.hidden_tag() }}
-			<span>{{ form.user_review.label() }}</span><br />
-			{{ form.user_review(rows="10", cols="100") }}
+
+			<div class="form-group">
+				<span>{{ form.user_review.label() }}</span><br />
+				{{ form.user_review(rows="10", class="form-control") }}
+				<small class="form-text text-muted">Input some text to classify.</small>
+			</div>
 
 			{% if form.user_review.errors %}
 				{% for error in form.user_review.errors %}
@@ -16,15 +20,33 @@
 				{% endfor %}
 			{% endif %}
 
-			<br /> <br />
-			{{ form.submit() }}
+			{{ form.submit(class="btn btn-primary") }}
 		</form>
-		{% with messages=get_flashed_messages(with_categories=true) %}
-			{% if messages %}
-				{% for category, message in messages %}
-					<div class="{{ category }}">{{ message }}</div>
-				{% endfor %}
-			{% endif %}
-		{% endwith %}
 	</div>
+
+		<br />
+		<br />
+	<div class="container">
+		{% if messages %}
+			<table>
+				<tr>
+					<th>You Wrote</th>
+					<th>Classified As</th>
+				</tr>
+
+				{% for message in messages %}
+				 	<tr>
+						<td>{{ message[0] }}</td>
+						<td>{{ message[1] }}</td>
+					</tr>
+				{% endfor %}
+
+			</table>
+
+		{% endif %}
+
+	</div>
+	<br />
+	<br />
+	<br />
 {% endblock content %}

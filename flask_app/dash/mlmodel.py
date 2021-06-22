@@ -2,20 +2,20 @@ import csv
 import random
 import nltk
 from nltk.tokenize import RegexpTokenizer
+import sqlite3
 
 def make_training_feature_set():
-	data = []
-	with open('../2000reviews.csv') as f:
-	    reader = csv.reader(f, delimiter=',')
-	    for i in reader:
-	        data.append(i)
 
-	f.close()
+	conn = sqlite3.connect("dash/static/data/review.db")
+	c = conn.cursor()
 
-	tokenizer = RegexpTokenizer(r'\w+')
+	c.execute("SELECT * FROM labeled_reviews")
+	data = c.fetchall()
 
 	labeled_reviews = []
 
+	tokenizer = RegexpTokenizer(r'\w+')
+	
 	for i in data:
 	    if i[1] == 'pos':
 	        tokens = tokenizer.tokenize(i[0])
@@ -63,9 +63,8 @@ def text_to_feature_set(review, word_features):
 	return features
 
 def classify_text(user_input):
-	labeled_reviews = make_training_feature_set()
-	(classifier, word_features) = train_classifier(labeled_reviews)
-
-	
 	return classifier.classify(text_to_feature_set(user_input, word_features))
 
+
+labeled_reviews = make_training_feature_set()
+(classifier, word_features) = train_classifier(labeled_reviews)
