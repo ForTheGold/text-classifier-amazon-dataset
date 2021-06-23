@@ -1,6 +1,9 @@
 # Project One - Artificial Meat Review Predictions
-
-This is a group project by Tamar Brand-Perez, Tiffany Price, Ben Tubbs, and Jose Santos.
+### Group Members & Respective Roles:
+ - Tamar Brand-Perez, Database Lead
+ - Tiffany Price, Project Manager
+ - Ben Tubbs, Machine Learning Lead
+ - Jose Santos, Dashboard Lead
 
 ## Topic
 
@@ -18,7 +21,7 @@ Our data set was pulled from the Amazon Grocery and Gourmet Food section (http:/
 
 In this project we will use a Natural Language Processing machine learning model to train a sentiment classifier on an Amazon dataset of Grocery and Gourmet Food reviews (https://jmcauley.ucsd.edu/data/amazon/) containing over 1 million reviews.  
 
-The goal of this classifier is to predict user sentiment (positive or negative) for fake meat products.  We believe this analysis will help artificial meat producers understand how reviews will impact ratings and have a potential impact on thier popularity and future sales.
+The goal of this classifier is to predict user sentiment (positive or negative) for fake meat products.  Upon having ratings predicted based on the reviews through NLP, We believe this analysis will help store owners identify which fake meat brands to sell. Having access to a model to predict ratings will allow the stakeholder to understand how reviews affect ratings and, in turn, impact future sales of fake meat products.
 
 ## Database
 
@@ -40,7 +43,7 @@ the overall is the rating number between one and five. We are focusing on 1 and 
 
 The algorithm uses a bag of words model and a Naive Bayes classifier.  It is explained in much greater detail below.
 
-### Week 1
+### Week 1 (Machine Learning)
 
 The data was cleaned and exported to this csv file ( https://drive.google.com/file/d/1gEXXLB23iYxTxxyPFyhmQ-dfvjoEhTOl/view?usp=sharing ) by Tamar.  I am currently reading the data from the file rather than the database because we are still working on getting the data in a database.
 
@@ -53,5 +56,14 @@ I then shuffled up the positive reviews for randomness and included the same num
 I plan to use a bag of words model with a Naive Bayes classifier for starters in order to classify the texts.  We will see what kind of accuracy we can get with that type of model.  We are going to scrape some data about fake meat products to classify as either positive or negative.
 
 
-### Week 2
-We conintued to clean and organize the data set to finalize the machine learning process.  We also started working on the two dashboards we plan to create. One will show the static information regarding the correlation between months/years and ratings. We also will have an interactive site that will allow a user to input review words to populate the anticipated positive or negative rating.  We also have started working on the graphics of the dashboard and the powerpoint slides.
+### Week 2 - Update on Progress
+We continued to clean and organize the data set to finalize the machine learning process and database.  We also started working on the dashboards and website we plan to create. Using Tableau, graphs will display static information regarding the correlation between months/years and ratings. We also are creating an interactive site that will allow a user to input review words, which will populate the predicted positive or negative rating.  This site will be available through Heroku.  Finally, work has begun on the slide deck for the final presentation.
+
+## Dashboard
+We have identified possible graphs to reflect our information, such as a line graph and/or a heat map. This is still a work in progress; we plan to use Tableau.
+
+## Presentation
+A copy of the draft slides has been uploaded to our repository.
+
+### Progress
+Our team meets at least three times per week and touches base regularly. We have found a productive cadence around roles and responsibilities and are continuing to make progress toward the final product.
