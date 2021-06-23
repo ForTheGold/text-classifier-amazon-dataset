@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, Markup
-from dash.forms import InputForm
+from dash.forms import InputForm, GenerateDataForm
 from dash import app
-from dash.mlmodel import *
+from dash.models import *
 
 messages = []
 
@@ -18,9 +18,15 @@ def data():
 def database():
 	return render_template('database.html', title='database')
 
-@app.route('/preprocessing')
+@app.route('/preprocessing', methods=['GET', 'POST'])
 def preprocessing():
-	return render_template('preprocessing.html', title='preprocessing')
+	messages = []
+	form = GenerateDataForm()
+	if form.validate_on_submit():
+		classification = create_new_feature_set()
+		messages = ["A new dataset has been successfully generated."]
+		return redirect(url_for('preprocessing'))
+	return render_template('preprocessing.html', form=form, messages=messages, title='preprocessing')
 
 @app.route('/model')
 def model():
