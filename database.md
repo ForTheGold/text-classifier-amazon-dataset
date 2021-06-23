@@ -13,7 +13,14 @@ The merged dataframes had many Nan's. Dropping them made it clear that there was
 
 - added a third table that includes the metadata of the reviews: added brand and title to the original data. After an inner join with the original data only 12 rows are left. 
 
-Links to the data:
+- created a join query on table plus to combine two tables. See image below. 
+
+- the sqlite database was connected to the machine learning algorythm. A subset of the reviews is used from the database to train the machine learning algorythm. 
+
+- An ERD was created to describe the database tables. See image below. 
+
+
+## Links to the data:
 sqlite dataset includes 1 and 5 star ratings: 3 tables one of original groceries data, one of MLdata table and the third includes fakemeat data:
 https://drive.google.com/file/d/1QFqJMKHAxnhfl3FOZBy1ZY2wjpn_7YAw/view?usp=sharing
 
@@ -24,12 +31,22 @@ csv file that includes fakemeat data (12 rows):
 https://drive.google.com/file/d/11oMHJFnbUi6OYeQhNKHXaWIkntmyHPl9/view?usp=sharing
 
 
-images of database in table plus:
+## images of database in table plus:
 ![groceriesALL_table.PNG](Resources/groceriesALL_table.PNG)
 
 ![MLtable.PNG](Resources/MLtable.PNG)
 
 ![fakemeat_table.PNG](Resources/fakemeat_table.PNG)
+
+
+## Image of join query on table plus
+
+![join.PNG](Resources/join.PNG)
+
+## Image of ERD describing database tables - need to add image
+
+![.PNG](Resources/.PNG)
+
 
 database deliverables week 2:
 Team members present a fully integrated
