@@ -43,7 +43,7 @@ https://drive.google.com/file/d/11oMHJFnbUi6OYeQhNKHXaWIkntmyHPl9/view?usp=shari
 
 ![join.PNG](Resources/join.PNG)
 
-## Image of ERD describing database tables - need to add image
+## Image of ERD describing database tables
 
 ![QuickDBD.png](Resources/QuickDBD.png)
 
