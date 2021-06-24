@@ -1,5 +1,5 @@
 from flask import render_template, url_for, flash, redirect, Markup
-from dash.forms import InputForm, GenerateDataForm
+from dash.forms import ClassifyUserInputForm, GenerateDataForm, ScrapeAmazonForm
 from dash import app
 from dash.models import *
 
@@ -32,9 +32,29 @@ def preprocessing():
 def model():
 	return render_template('model.html', title='Model')
 
-@app.route('/verification')
+@app.route('/verification', methods=['GET', 'POST'])
 def verification():
-	return render_template('verification.html', title='Verification')
+	form = ScrapeAmazonForm()
+	if form.validate_on_submit():
+
+		headers = {
+						"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0", 
+			           "Accept-Encoding":"gzip, deflate", 
+			           "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", 
+			           "DNT":"1","Connection":"close", 
+			           "Upgrade-Insecure-Requests":"1"
+			      }
+
+		amazon_reviews = scrape_amazon(form.user_url_input.data, headers)
+		write_reviews_to_db(amazon_reviews)
+		return redirect(url_for('verification'))
+	# conn = sqlite3.connect("reviewdb.db")
+	# c = conn.cursor()
+	# c.execute("SELECT * FROM scraped_reviews")
+	# amazon_data = c.fetchall()
+	# conn.close()
+	#, amazon_data=amazon_data
+	return render_template('verification.html', form=form, title='Verification')
 
 @app.route('/predictions')
 def predictions():
@@ -42,7 +62,7 @@ def predictions():
 
 @app.route('/demo', methods=['GET', 'POST'])
 def demo():
-	form = InputForm()
+	form = ClassifyUserInputForm()
 	if form.validate_on_submit():
 		classification = classify_text(form.user_review.data)
 		if classification == "pos":

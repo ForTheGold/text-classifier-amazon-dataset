@@ -2,6 +2,8 @@ import re
 import csv
 import random
 import sqlite3
+import requests
+from bs4 import BeautifulSoup
 import nltk
 from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
@@ -62,10 +64,11 @@ def create_new_feature_set():
 	for i in labeled_reviews:
 		labeled_reviews_joined.append((" ".join(i[0]), i[1]))
 
-	conn2 = sqlite3.connect("dash/static/data/review1.db")
+	conn2 = sqlite3.connect("dash/static/data/review.db")
 	c2 = conn2.cursor()
-
-	c2.execute("""CREATE TABLE labeled_reviews('review', 'label')""")
+	
+	c2.execute("DROP TABLE labeled_reviews")
+	c2.execute("CREATE TABLE labeled_reviews('review', 'label')")
 
 	for entry in labeled_reviews_joined:
 	    c2.execute("INSERT INTO labeled_reviews('review', 'label') VALUES(?, ?)", (entry[0], entry[1]))
@@ -140,3 +143,53 @@ def classify_text(user_input):
 
 labeled_reviews = make_training_feature_set()
 (classifier, word_features) = train_classifier(labeled_reviews)
+
+# VERIFICATION PAGE
+
+def scrape_amazon(main_page_url, headers):
+    main_page = requests.get(main_page_url, headers=headers)
+    main_page_soup = BeautifulSoup(main_page.content, 'html.parser')
+    print(main_page_soup.prettify())
+    data = []
+    
+    product_name = main_page_soup.find('span', {'id': 'productTitle'}).get_text().strip()
+    brand_name = main_page_soup.find('a', {'id': 'bylineInfo'}).get_text().strip()[7:]
+    price = main_page_soup.find('span', {'id': 'priceblock_ourprice'}).get_text().strip()[1:]
+    asin = main_page_soup.find('ul', {'class': 'detail-bullet-list'}).findAll('li')[4].findAll('span')[2].get_text()
+    overall_rating = main_page_soup.find('span', {'data-hook': 'rating-out-of-text'}).get_text()[:3]
+    
+    review_url_base = url[:-1].replace("dp", "product-reviews") + "?ie=UTF8&reviewerType=all_reviews&sortBy=recent&pageNumber="
+    review_urls = [review_url_base + str(i) for i in range(1, 10)]
+    
+    for review_url in review_urls:
+        review_page = requests.get(review_url, headers=headers)
+        review_page_soup = BeautifulSoup(review_page.content, 'html.parser')
+        username = review_page_soup.findAll('span', {'class': 'a-profile-name'})
+        date = review_page_soup.findAll('span', {'data-hook': 'review-date'})
+        rating = soup.find_all('i', {'data-hook': 'review-star-rating'})
+        review = soup.find_all('span', {'data-hook': 'review-body'})
+        
+        for i in range(2, 8):
+            try:
+                reviewer_username = username[i].get_text()
+                review_date = date[i].get_text()[33:]
+                review_rating = rating[i].span.get_text()[:3]
+                review_text = review[i].get_text()[:-9].strip()
+
+                data.append([brand_name, product_name, asin, price, overall_rating, reviewer_username, review_date, review_rating, review_text])
+                
+            except:
+                continue
+    return data
+
+def write_reviews_to_db(data):
+    conn = sqlite3.connect("reviewdb.db")
+    c = conn.cursor()
+    c.execute("""CREATE TABLE IF NOT EXISTS scraped_reviews ('brand_name', 'product_name', 'asin', 'price', 'overall_rating', 'reviewer_username', 'review_date', 'review_rating', 'review_text')""")
+    
+    for entry in data:
+        c.execute("INSERT INTO scraped_reviews ('brand_name', 'product_name', 'asin', 'price', 'overall_rating', 'reviewer_username', 'review_date', 'review_rating', 'review_text') VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", 
+                  (entry[0], entry[1], entry[2], entry[3], entry[4], entry[5], entry[6], entry[7], entry[8]))
+        
+    conn.commit()
+    conn.close()

@@ -6,4 +6,23 @@
 			<p>We verified our results on these labeled data</p>
 		</div>
 	</div>
+
+	<div class="container">
+		<form method="POST" action="">
+			{{ form.hidden_tag() }}
+
+			<div class="form-group">
+				<span>{{ form.user_url_input.label() }}</span><br />
+				{{ form.user_url_input(class="form-control") }}
+				<small class="form-text text-muted">Input an Amazon product URL to scrape.</small>
+			</div>
+			{{ form.submit(class="btn btn-primary") }}
+		</form>
+	</div>
+
+	<div class="container">
+		{% for datum in amazon_data %}
+		 	{{ datum }}
+		{% endfor %}
+	</div>
 {% endblock content %}
