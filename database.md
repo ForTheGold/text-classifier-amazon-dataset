@@ -45,7 +45,7 @@ https://drive.google.com/file/d/11oMHJFnbUi6OYeQhNKHXaWIkntmyHPl9/view?usp=shari
 
 ## Image of ERD describing database tables - need to add image
 
-![.PNG](Resources/.PNG)
+![QuickDBD.png](Resources/QuickDBD.png)
 
 
 database deliverables week 2:
