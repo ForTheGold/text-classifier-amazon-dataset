@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 from io import StringIO
 import contextlib
 import sys
+import time
 import nltk
 from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
@@ -165,7 +166,7 @@ def get_features():
 
 	# output assigned to variable
 	output_string = new_stdout.read()
-	
+
 	return (accuracy, features, output_string)
 
 (accuracy, features, output_string) = get_features()
@@ -175,25 +176,51 @@ def get_features():
 def scrape_amazon(main_page_url, headers):
     main_page = requests.get(main_page_url, headers=headers)
     main_page_soup = BeautifulSoup(main_page.content, 'html.parser')
-    print(main_page_soup.prettify())
+    time.sleep(2)
+
     data = []
     
-    product_name = main_page_soup.find('span', {'id': 'productTitle'}).get_text().strip()
-    brand_name = main_page_soup.find('a', {'id': 'bylineInfo'}).get_text().strip()[7:]
-    price = main_page_soup.find('span', {'id': 'priceblock_ourprice'}).get_text().strip()[1:]
-    asin = main_page_soup.find('ul', {'class': 'detail-bullet-list'}).findAll('li')[4].findAll('span')[2].get_text()
-    overall_rating = main_page_soup.find('span', {'data-hook': 'rating-out-of-text'}).get_text()[:3]
+    try:
+        product_name = main_page_soup.find('span', {'id': 'productTitle'}).get_text().strip()
+    except Exception as e:
+        product_name = ""
+        print(e)
+        
+    try:
+        brand_name = main_page_soup.find('a', {'id': 'bylineInfo'}).get_text().strip()[7:]
+    except Exception as e:
+        brand_name = ""
+        print(e)
     
-    review_url_base = url[:-1].replace("dp", "product-reviews") + "?ie=UTF8&reviewerType=all_reviews&sortBy=recent&pageNumber="
+    try:
+        price = main_page_soup.find('span', {'class': 'priceBlockBuyingPriceString'}).get_text().strip()[1:]
+    except Exception as e:
+        price = ""
+        print(e)
+        
+    try:
+        asin = main_page_soup.find('ul', {'class': 'detail-bullet-list'}).findAll('li')[4].findAll('span')[2].get_text()
+    except Exception as e:
+        asin = ""
+        print(e)
+    
+    try:
+        overall_rating = main_page_soup.find('span', {'data-hook': 'rating-out-of-text'}).get_text()[:3]
+    except Exception as e:
+        overall_rating = ""
+        print(e)
+    
+    review_url_base = main_page_url[:-1].replace("dp", "product-reviews") + "?ie=UTF8&reviewerType=all_reviews&sortBy=recent&pageNumber="
     review_urls = [review_url_base + str(i) for i in range(1, 10)]
     
     for review_url in review_urls:
         review_page = requests.get(review_url, headers=headers)
         review_page_soup = BeautifulSoup(review_page.content, 'html.parser')
+        time.sleep(2)
         username = review_page_soup.findAll('span', {'class': 'a-profile-name'})
         date = review_page_soup.findAll('span', {'data-hook': 'review-date'})
-        rating = soup.find_all('i', {'data-hook': 'review-star-rating'})
-        review = soup.find_all('span', {'data-hook': 'review-body'})
+        rating = review_page_soup.find_all('i', {'data-hook': 'review-star-rating'})
+        review = review_page_soup.find_all('span', {'data-hook': 'review-body'})
         
         for i in range(2, 8):
             try:
@@ -204,18 +231,47 @@ def scrape_amazon(main_page_url, headers):
 
                 data.append([brand_name, product_name, asin, price, overall_rating, reviewer_username, review_date, review_rating, review_text])
                 
-            except:
+            except Exception as e:
+                print(e)
                 continue
     return data
 
 def write_reviews_to_db(data):
     conn = sqlite3.connect("reviewdb.db")
     c = conn.cursor()
-    c.execute("""CREATE TABLE IF NOT EXISTS scraped_reviews ('brand_name', 'product_name', 'asin', 'price', 'overall_rating', 'reviewer_username', 'review_date', 'review_rating', 'review_text')""")
-    
+    c.execute("DROP TABLE scraped_reviews")
+    conn.commit()
+    c.execute("""CREATE TABLE scraped_reviews ('brand_name', 'product_name', 'asin', 'price', 'overall_rating', 'reviewer_username', 'review_date', 'review_rating', 'review_text')""")
+    conn.commit()
     for entry in data:
         c.execute("INSERT INTO scraped_reviews ('brand_name', 'product_name', 'asin', 'price', 'overall_rating', 'reviewer_username', 'review_date', 'review_rating', 'review_text') VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", 
                   (entry[0], entry[1], entry[2], entry[3], entry[4], entry[5], entry[6], entry[7], entry[8]))
+        
+    conn.commit()
+    conn.close()
+
+# REDDIT SCRAPING
+
+def scrape_reddit(url, headers):
+    page = requests.get(url, headers=headers)
+    soup = BeautifulSoup(page.content, 'html.parser')
+    
+    comments = soup.find_all('p')
+    clean_comments = [comment.get_text() for comment in comments if len(comment.get_text().split()) > 2]
+    
+    title = soup.find("h1").get_text()
+    
+    return (title, clean_comments)
+
+def write_to_reddit_thread_db(title, clean_comments):
+    conn = sqlite3.connect("reviewdb.db")
+    c = conn.cursor()
+    c.execute("DROP TABLE IF EXISTS reddit_thread")
+    c.execute("CREATE TABLE reddit_thread ('title', 'comment')")
+    
+    for clean_comment in clean_comments:
+        c.execute("INSERT INTO reddit_thread ('title', 'comment') VALUES (?, ?)", 
+                  (title, clean_comment))
         
     conn.commit()
     conn.close()

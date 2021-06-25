@@ -1,5 +1,5 @@
 from flask import render_template, url_for, flash, redirect, Markup
-from dash.forms import ClassifyUserInputForm, GenerateDataForm, ScrapeAmazonForm
+from dash.forms import ClassifyUserInputForm, GenerateDataForm, ScrapeAmazonForm, ScrapeRedditForm
 from dash import app
 from dash.models import *
 
@@ -54,17 +54,51 @@ def verification():
 		amazon_reviews = scrape_amazon(form.user_url_input.data, headers)
 		write_reviews_to_db(amazon_reviews)
 		return redirect(url_for('verification'))
-	# conn = sqlite3.connect("reviewdb.db")
-	# c = conn.cursor()
-	# c.execute("SELECT * FROM scraped_reviews")
-	# amazon_data = c.fetchall()
-	# conn.close()
-	#, amazon_data=amazon_data
-	return render_template('verification.html', form=form, title='Verification')
+	conn = sqlite3.connect("reviewdb.db")
+	c = conn.cursor()
+	c.execute("SELECT reviewer_username, review_date, review_rating, review_text FROM scraped_reviews")
+	amazon_data = c.fetchall()
 
-@app.route('/predictions')
+	our_classifications = [classify_text(review[3]) for review in amazon_data]
+
+	c2 = conn.cursor()
+	c2.execute("SELECT DISTINCT(brand_name) FROM scraped_reviews")
+	brand_names = c2.fetchall()
+
+	brand_name_values = [brand_name[0].replace(" ", "-") for brand_name in brand_names]
+
+	c3 = conn.cursor()
+	c3.execute("SELECT DISTINCT(product_name), brand_name, asin, price, overall_rating FROM scraped_reviews WHERE brand_name=?", (brand_names[0]))
+	brand_header = c3.fetchall()
+	conn.close()
+	
+	return render_template('verification.html', 
+							form=form,
+							brand_names=brand_names,
+							brand_name_values=brand_name_values,
+							brand_header=brand_header, 
+							amazon_data=amazon_data,
+							our_classifications=our_classifications, 
+							title='Verification')
+
+@app.route('/predictions', methods=['GET', 'POST'])
 def predictions():
-	return render_template('predictions.html', title='Predictions')
+	form = ScrapeRedditForm()
+
+	if form.validate_on_submit():
+		headers = {'User-Agent': 'Mozilla/5.0'}
+		(title, clean_comments) = scrape_reddit(form.user_url_input.data, headers)
+		write_to_reddit_thread_db(title, clean_comments)
+		return redirect(url_for('predictions'))
+
+	conn = sqlite3.connect("reviewdb.db")
+	c = conn.cursor()
+	c.execute("SELECT * FROM reddit_thread")
+	reddit_data = c.fetchall()
+
+	our_classifications = [classify_text(review[1]) for review in reddit_data]
+
+	return render_template('predictions.html', form=form, reddit_data=reddit_data, our_classifications=our_classifications, title='Predictions')
 
 @app.route('/demo', methods=['GET', 'POST'])
 def demo():

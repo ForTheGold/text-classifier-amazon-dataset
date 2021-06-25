@@ -17,4 +17,8 @@ class ScrapeAmazonForm(FlaskForm):
 	user_url_input = StringField('Enter an Amazon Product URL to Scrape')
 	submit = SubmitField('Scrape Amazon!')
 
+class ScrapeRedditForm(FlaskForm):
+	user_url_input = StringField('Enter an Reddit Thread URL to Scrape')
+	submit = SubmitField('Scrape Reddit!')
+
 	
