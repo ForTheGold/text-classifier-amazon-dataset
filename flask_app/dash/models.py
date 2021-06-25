@@ -237,7 +237,7 @@ def scrape_amazon(main_page_url, headers):
     return data
 
 def write_reviews_to_db(data):
-    conn = sqlite3.connect("reviewdb.db")
+    conn = sqlite3.connect("dash/static/data/reviewdb.db")
     c = conn.cursor()
     c.execute("DROP TABLE scraped_reviews")
     conn.commit()
@@ -264,7 +264,7 @@ def scrape_reddit(url, headers):
     return (title, clean_comments)
 
 def write_to_reddit_thread_db(title, clean_comments):
-    conn = sqlite3.connect("reviewdb.db")
+    conn = sqlite3.connect("dash/static/data/reviewdb.db")
     c = conn.cursor()
     c.execute("DROP TABLE IF EXISTS reddit_thread")
     c.execute("CREATE TABLE reddit_thread ('title', 'comment')")

@@ -54,7 +54,7 @@ def verification():
 		amazon_reviews = scrape_amazon(form.user_url_input.data, headers)
 		write_reviews_to_db(amazon_reviews)
 		return redirect(url_for('verification'))
-	conn = sqlite3.connect("reviewdb.db")
+	conn = sqlite3.connect("dash/static/data/reviewdb.db")
 	c = conn.cursor()
 	c.execute("SELECT reviewer_username, review_date, review_rating, review_text FROM scraped_reviews")
 	amazon_data = c.fetchall()
@@ -91,7 +91,7 @@ def predictions():
 		write_to_reddit_thread_db(title, clean_comments)
 		return redirect(url_for('predictions'))
 
-	conn = sqlite3.connect("reviewdb.db")
+	conn = sqlite3.connect("dash/static/data/reviewdb.db")
 	c = conn.cursor()
 	c.execute("SELECT * FROM reddit_thread")
 	reddit_data = c.fetchall()
