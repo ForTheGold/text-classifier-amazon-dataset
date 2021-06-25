@@ -4,6 +4,9 @@ import random
 import sqlite3
 import requests
 from bs4 import BeautifulSoup
+from io import StringIO
+import contextlib
+import sys
 import nltk
 from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
@@ -125,7 +128,7 @@ def train_classifier(labeled_reviews):
 
 	classifier = nltk.NaiveBayesClassifier.train(featuresets)
 
-	return (classifier, word_features)
+	return (classifier, word_features, featuresets)
 
 
 
@@ -142,7 +145,28 @@ def classify_text(user_input):
 
 
 labeled_reviews = make_training_feature_set()
-(classifier, word_features) = train_classifier(labeled_reviews)
+(classifier, word_features, featuresets) = train_classifier(labeled_reviews)
+
+def get_features():
+	accuracy = round((nltk.classify.accuracy(classifier, featuresets[int(len(featuresets)*.7):]) * 100), 2)
+	features = classifier.most_informative_features(100)
+	@contextlib.contextmanager
+	def stdout_redirect(where):
+	    sys.stdout = where
+	    try:
+	        yield where
+	    finally:
+	        sys.stdout = sys.__stdout__
+
+	with stdout_redirect(StringIO()) as new_stdout:
+	    classifier.show_most_informative_features(15)
+
+	new_stdout.seek(0)
+
+	# output assigned to variable
+	output_string = new_stdout.read()
+
+	return (accuracy, features, output_string)
 
 # VERIFICATION PAGE
 

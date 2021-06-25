@@ -22,11 +22,12 @@ def database():
 def preprocessing():
 	messages = []
 	form = GenerateDataForm()
+	accuracy, features, output_string = get_features()
 	if form.validate_on_submit():
 		classification = create_new_feature_set()
 		messages = ["A new dataset has been successfully generated."]
 		return redirect(url_for('preprocessing'))
-	return render_template('preprocessing.html', form=form, messages=messages, title='Preprocessing')
+	return render_template('preprocessing.html', form=form, messages=messages, accuracy=accuracy, features=features, output_string=output_string, title='Preprocessing')
 
 @app.route('/model')
 def model():
