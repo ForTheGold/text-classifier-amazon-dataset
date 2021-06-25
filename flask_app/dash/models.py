@@ -165,8 +165,10 @@ def get_features():
 
 	# output assigned to variable
 	output_string = new_stdout.read()
-
+	
 	return (accuracy, features, output_string)
+
+(accuracy, features, output_string) = get_features()
 
 # VERIFICATION PAGE
 

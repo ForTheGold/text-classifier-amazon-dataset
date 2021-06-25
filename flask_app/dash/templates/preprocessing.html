@@ -29,17 +29,38 @@
 		<p>Here are the most informative features found in the current model</p>
 		<table>
 			<tr>
-				<th>Feature</th>
+				<th colspan="10">Most informative Features (Lemmas)</th>
 			</tr>
-
-			{% for feature in features %}
-			 	<tr>
-					<td>{{ feature[0] }}</td>
-				</tr>
+			{% for i in range(features | length) %}
+			 	{% if i % 10 == 0 %}<tr> {% endif %}
+					<td>{{ features[i][0] }}</td>
+				{% if i+9 % 10 == 0 %}</tr> {% endif %}
 			{% endfor %}
-
 		</table>
+	</div>
 
-		{{ output_string }}
+	<div class="container">
+		<table>
+			<tr>
+				<th>Feature</th>
+				<th>Sentiment</th>
+				<th>Certainty</th>
+			</tr>
+			{% for i in range(output_string_to_list | length) %}
+			 	{% if i % 10 == 0 %}
+			 		<tr> 
+						<td>{{ output_string_to_list[i][0] | upper }}{{ output_string_to_list[i][1:] }}</td>
+				{% endif %}
+				{% if i % 10 == 3 %}
+					
+						<td>{% if output_string_to_list[i] == "pos" %} Positive {% else  %} Negative {% endif %}</td>
+				{% endif %}
+				{% if i % 10 == 7 %}
+						<td>{{ output_string_to_list[i] }}%</td>
+					</tr>
+				{% endif %}
+
+			{% endfor %}
+		</table>
 	</div>
 {% endblock content %}
