@@ -6,4 +6,54 @@
 			<p>We verified our results on these labeled data</p>
 		</div>
 	</div>
+
+	<div class="container">
+		<form method="POST" action="">
+			{{ form.hidden_tag() }}
+
+			<div class="form-group">
+				<span>{{ form.user_url_input.label() }} (takes about one minute to complete)</span><br />
+				{{ form.user_url_input(class="form-control") }}
+				<small class="form-text text-muted">Your url should be of the form: https://www.amazon.com/Beyond-Meat-Beef-16-Ounce/dp/B07R6TRHQ2/</small>
+			</div>
+			{{ form.submit(class="btn btn-primary") }}
+		</form>
+	</div>
+	<hr>
+	<div class="container">
+			Brand Name: {% if brand_header[0][1] != "" %} {{ brand_header[0][1] }} {% else %} Not found {% endif %}<br />
+			Product Title: {% if brand_header[0][0] != "" %} {{ brand_header[0][0] }} {% else %} Not found {% endif %}<br />
+			ASIN: {% if brand_header[0][2] != "" %} {{ brand_header[0][2] }} {% else %} Not found {% endif %}<br />
+			Price: {% if brand_header[0][3] != "" %} {{ brand_header[0][3] }} {% else %} Not found {% endif %}<br />
+			Overall Rating: {% if brand_header[0][4] != "" %} {{ brand_header[0][4] }} {% else %} Not found {% endif %}<br />
+
+		<hr>
+
+		<div class="container">
+				<table>
+					<tr>
+						<th>Reviewer Username</th>
+						<th>Review Date</th>
+						<th>Review Rating</th>
+						<th>Review Text</th>
+						<th>Classified As</th>
+					</tr>
+
+					{% for i in range(amazon_data | length) %}
+					 	<tr>
+							<td>{{ amazon_data[i][0] }}</td>
+							<td>{{ amazon_data[i][1] }}</td>
+							<td>{{ amazon_data[i][2] }}</td>
+							<td>{{ amazon_data[i][3] }}</td>
+							<td>{{ our_classifications[i] }}</td>
+						</tr>
+					{% endfor %}
+
+				</table>
+		</div>
+
+<!-- 		{% for datum in amazon_data %}
+		 	{{ datum }}
+		{% endfor %} -->
+	</div>
 {% endblock content %}

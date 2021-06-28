@@ -1,0 +1,36 @@
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.jumbotron {
+	background-color: #8dd8d3 !important;
+  background-image: "static/img/img1.jpg";
+  background-position: right;
+}
+
+.navbar {
+	background-color: #8dd8d3 !important;
+}
+
+.navbar-nav > .active > a { 
+    background-color: #599191 !important;
+    color: #d7e6a3 !important;
+}
+
+/*.front-page-img {
+  position: absolute;
+  top: 110px;
+  right: 250px;
+}*/

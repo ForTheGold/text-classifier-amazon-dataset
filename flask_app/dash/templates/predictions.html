@@ -6,4 +6,42 @@
 			<p>We made these predictions on data without labels</p>
 		</div>
 	</div>
+
+	<div class="container">
+		<form method="POST" action="">
+			{{ form.hidden_tag() }}
+
+			<div class="form-group">
+				<span>{{ form.user_url_input.label() }}</span><br />
+				{{ form.user_url_input(class="form-control") }}
+				<small class="form-text text-muted">Enter Reddit Thread URL above</small>
+			</div>
+			{{ form.submit(class="btn btn-primary") }}
+		</form>
+	</div>
+
+	<hr />
+
+	<div class="container">
+		<h3>Reddit Thread Title: {{ reddit_data[0][0] }}</h3>
+	</div>
+
+	<hr />
+
+	<div class="container">
+				<table>
+					<tr>
+						<th>Comment</th>
+						<th>Classification</th>
+					</tr>
+
+					{% for i in range(reddit_data | length) %}
+					 	<tr>
+							<td>{{ reddit_data[i][1] }}</td>
+							<td>{% if our_classifications[i] == "pos" %} Positive {% else %} Negative {% endif %}</td>
+						</tr>
+					{% endfor %}
+
+				</table>
+		</div>
 {% endblock content %}
