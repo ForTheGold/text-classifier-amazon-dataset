@@ -11,6 +11,7 @@ The merged dataframes had many Nan's. Dropping them made it clear that there was
 
 - added a second table to the database for the machine learning model to connect to it instead of using the csv file. Table name: groceriesMLData.
 
+<<<<<<< HEAD
 Links to the data:
 sqlite dataset includes 1 and 5 star ratings with review text as well as review length, time, reviewer id:
 https://drive.google.com/file/d/1QFqJMKHAxnhfl3FOZBy1ZY2wjpn_7YAw/view?usp=sharing
@@ -19,10 +20,42 @@ csv file with 1 and 5 star ratings with review text, review length, time reviewe
 https://drive.google.com/file/d/1Sp1hZ6GKqPVKF9W2qp3O0rmTO9CSaweB/view?usp=sharing
 
 images of database in table plus:
+=======
+- added a third table that includes the metadata of the reviews: added brand and title to the original data. After an inner join with the original data only 12 rows are left. 
+
+- created a join query on table plus to combine two tables. See image below. (as per project requirements)
+
+- the sqlite database was connected to the machine learning algorythm. A subset of the reviews is used from the database to train the machine learning algorythm. 
+
+- scraped data from amazon was added to the database. This is the table: scraped_reviews. It includes fakemeat data. It replaces the fakemeat data from the original dataset that hd only 12 rows. 
+
+- The new version of the database includes 3 tables: groceriesALL which is the original data, groceriesMLData which is the data used in the machine learning algorithm and scraped_reviews which is the data scraped from Amazon of fakemeat product reviews. 
+
+- An ERD was created to describe the database tables. See image below. 
+
+
+## Links to the data:
+
+### reviewdb.db: updated sqlite database with scraped data, all groceries data and ML data tables:
+https://drive.google.com/file/d/1dmxUiRXfJX1dMDdqdZdfr-iHuozO44Q1/view?usp=sharing
+
+### old sqlite dataset includes 1 and 5 star ratings: 3 tables one of original groceries data, one of MLdata table and the third includes fakemeat data:
+https://drive.google.com/file/d/1QFqJMKHAxnhfl3FOZBy1ZY2wjpn_7YAw/view?usp=sharing
+
+### csv file with 1 and 5 star ratings with review text, review length, time, reviewer id:
+https://drive.google.com/file/d/1Sp1hZ6GKqPVKF9W2qp3O0rmTO9CSaweB/view?usp=sharing
+
+### csv file that includes fakemeat data from metadata (12 rows):
+https://drive.google.com/file/d/11oMHJFnbUi6OYeQhNKHXaWIkntmyHPl9/view?usp=sharing
+
+
+## images of database in table plus:
+>>>>>>> DB_6_22
 ![groceriesALL_table.PNG](Resources/groceriesALL_table.PNG)
 
 ![MLtable.PNG](Resources/MLtable.PNG)
 
+<<<<<<< HEAD
 database deliverables week 2:
 Team members present a fully integrated
 database.
@@ -37,6 +70,25 @@ joins in Pandas) ✓ Includes at least one connection string
 (using SQLAlchemy or PyMongo)
 Note: If you use a SQL database, you
 must provide your ERD with relationships
+=======
+![scraped_reviews_table.PNG](Resources/scraped_reviews_table.PNG)
+
+old:
+![fakemeat_table.PNG](Resources/fakemeat_table.PNG)
+
+
+## Image of join query on table plus
+
+![join.PNG](Resources/join.PNG)
+
+
+## Image of ERD describing database tables - updated
+
+![QuickDBD2.png](Resources/QuickDBD2.png)
+
+
+
+>>>>>>> DB_6_22
 
 
 
