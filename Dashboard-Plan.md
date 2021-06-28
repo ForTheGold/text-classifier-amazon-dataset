@@ -35,3 +35,7 @@ then a slide showing how the sentiment for the brand changes with time by depict
 
 ![](/Resources/Dashboard-2.PNG)
 
+# Week 3 - Dashboard Template
+
+Continue to work on Dashboard for Tableau.
+Will use scraping data from 5 different brands to generate figures for dashboard.
