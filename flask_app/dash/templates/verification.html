@@ -45,7 +45,7 @@
 							<td>{{ amazon_data[i][1] }}</td>
 							<td>{{ amazon_data[i][2] }}</td>
 							<td>{{ amazon_data[i][3] }}</td>
-							<td>{{ our_classifications[i] }}</td>
+							<td>{% if our_classifications[i] == "pos" %} Positive {% else %} Negative {% endif %}</td>
 						</tr>
 					{% endfor %}
 

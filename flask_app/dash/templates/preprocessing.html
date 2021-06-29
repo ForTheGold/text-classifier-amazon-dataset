@@ -2,9 +2,66 @@
 {% block content %}
 	<div class="container">
 		<div class="jumbotron">
-			<h1>Preprocessing</h1>
-			<p>We cleaned our dataset before using it to train our model</p>
+			<div class="row">
+            	<div class="col-md-7">
+					<h1>Preprocessing and Model</h1>
+					<p>We cleaned our dataset and used it to train our model</p>
+				</div>
+				<div class="col-md-5">
+					<img src="../static/img/sentimentanalysis3.png" class="img-rounded" alt="Sentiment Analysis" width="300" height="250"/>
+				</div>
+			</div>
 		</div>
+	</div>
+
+	<div class="container">
+		<h2>Preprocessing</h2>
+		<hr>
+		<p>Our dataset is a collection of Amazon reviews that we used to train the model.  Amazon reviews may contain any type of lexicon including words that are misspelled, abbreviated, capitalized, contain punctuation, etc.  The first step is to normalize this lexicon so that items such as “I’m”, “Im”, “i’m” and “im” are not treated as different words.</p>
+		<h3>Tokenization</h3>
+		<hr>
+		<p>The first thing we need to do is to split the sentence into a python list of individual tokens or word boundaries that are separated in a smart way in order to process the text.</p>
+		<img src="../static/img/tokenization1.png" class="img-rounded img-responsive center-block" alt="Tokenization" />
+		<h4>Why is tokenization necessary?</h4>
+		<p>We could do something simple like split the sentence at each word space.  But what about periods at the end of the sentence.  We could split the words at a space or period, but what about questions marks and exclamation points?  We could split the words at the spaces and a set of predefined punctuation marks, but what about words like “Mr.”.  Do we want to keep the period?  This is where tokenization comes in.  The words are split in a very intelligent way.</p>
+		<img src="../static/img/tokenization2.png" class="img-rounded img-responsive center-block" alt="Tokenization" />
+
+		<h3>Cleaning and Normalization</h3>
+		<hr>
+		<p>Now that we have our tokens, it is necessary to take some time to clean the data so that we have as few repeat entries as possible.</p>
+
+		<img src="../static/img/cleaning1.png" class="img-rounded img-responsive center-block" alt="Cleaning" width="300" height="250" />
+
+		<ul>
+		<li><strong>Casing</strong> - The first step was to switch every letter of every token to lowercase, so that tokens such as “The” and “the” would not be treated as separate entries</li>
+		<li><strong>Removing Non Alphanumerics</strong> - Next all letters that were not alphanumeric were removed to prevent words such as “mr” and “mr.” from being treated as separate tokens</li>
+		<li><strong>Length</strong> - All tokens that were less than length 2 were also removed</li>
+		<li><strong>Stop Words</strong> - Stop words were removed</li>
+		<li><strong>Lemmatization</strong> - All words were lemmatized for greater normalization</li>
+		</ul>
+
+		<h4>What are Stop Words?</h4>
+		<img src="../static/img/stopwords1.jpg" class="img-rounded img-responsive center-block" alt="Stop Words" width="500" height="100" />
+/>
+		<p>Stop words are words that do not add a lot of meaning to the text such as “the”, “it”, “as” and “about”.  They may also include words that are often used sarcastically.  This means that they may have their true meaning or the opposite meaning.  Hence, they are removed.</p>
+
+		<h4>What is Lemmatization?</h4>
+		<img src="../static/img/lemmatization1.png" class="img-rounded img-responsive center-block" alt="Lemmatization" width="500" height="100" />
+		<p>The same word may come in many forms, such as: “eat”, “ate”, “eaten”, etc.  All of these words can be normalized to what are called lemmas so that they are not treated as separate tokens, but as the same token.</p>
+
+		<h2>Making the Featureset</h2>
+		<hr>
+		<p>We used a bag of words model in which the featureset was the presence or absence of the 3000 most commonly found words in the text.</p>
+
+		<h3>Labeled Data</h3>
+		<hr>
+		<img src="../static/img/labeleddata1.png" class="img-rounded img-responsive center-block" alt="Stop Words" width="500" height="100"/>
+		<p>Now that we have all of this processing to normalize the data finished, we need to create our labeled data set.  Only reviews of food products from Amazon that were rated as five stars or one star were used.  One star reviews were labeled as negative and five star reviews were labeled as positive.</p>
+		<p>Additionally, there were a great deal more positive reviews than negative reviews so 1000 of each type were randomly selected to ensure there was no bias in the model.</p>
+		<img src="../static/img/labeleddata2.png" class="img-rounded img-responsive center-block" alt="Stop Words" width="500" height="100" />
+
+
+
 	</div>
 
 	<div class="container">
@@ -13,16 +70,6 @@
 			{{ form.submit(class="btn btn-primary") }} (may take several minutes to complete)
 		</form>
 	</div>
-
-	{% if messages %}
-		<div class="container">
-			{% for message in messages %}
-				<div class="alert alert-secondary" role="alert">
-  					{{ message }}
-				</div>
-			{% endfor %}
-		</div>
-	{% endif %}
 
 	<div class="container">
 		<h3>The model gets {{ accuracy }}% accuracy!</h3>

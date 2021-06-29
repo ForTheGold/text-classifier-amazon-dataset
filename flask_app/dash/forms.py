@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired, Length
+from wtforms.validators import DataRequired
 from wtforms.widgets import TextArea
 
 class GenerateDataForm(FlaskForm):
@@ -9,8 +9,7 @@ class GenerateDataForm(FlaskForm):
 class ClassifyUserInputForm(FlaskForm):
 	user_review = StringField('Write your review here', 
 								widget=TextArea(),
-								validators=[DataRequired(), 
-								Length(min=10)])
+								validators=[DataRequired()])
 	submit = SubmitField('Check Your Review!')
 
 class ScrapeAmazonForm(FlaskForm):
