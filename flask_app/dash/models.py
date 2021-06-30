@@ -176,8 +176,7 @@ def get_features():
 def scrape_amazon(main_page_url, headers):
     main_page = requests.get(main_page_url, headers=headers)
     main_page_soup = BeautifulSoup(main_page.content, 'html.parser')
-    time.sleep(2)
-
+    print(main_page_soup.prettify())
     data = []
     
     try:
@@ -210,13 +209,12 @@ def scrape_amazon(main_page_url, headers):
         overall_rating = ""
         print(e)
     
-    review_url_base = main_page_url[:-1].replace("dp", "product-reviews") + "?ie=UTF8&reviewerType=all_reviews&sortBy=recent&pageNumber="
-    review_urls = [review_url_base + str(i) for i in range(1, 10)]
+    review_url_base = main_page_url.replace("dp", "product-reviews") + "?ie=UTF8&reviewerType=all_reviews&sortBy=recent&pageNumber="
+    review_urls = [review_url_base + str(i) for i in range(1, 4)]
     
     for review_url in review_urls:
         review_page = requests.get(review_url, headers=headers)
         review_page_soup = BeautifulSoup(review_page.content, 'html.parser')
-        time.sleep(2)
         username = review_page_soup.findAll('span', {'class': 'a-profile-name'})
         date = review_page_soup.findAll('span', {'data-hook': 'review-date'})
         rating = review_page_soup.find_all('i', {'data-hook': 'review-star-rating'})
@@ -239,7 +237,7 @@ def scrape_amazon(main_page_url, headers):
 def write_reviews_to_db(data):
     conn = sqlite3.connect("dash/static/data/reviewdb.db")
     c = conn.cursor()
-    c.execute("DROP TABLE scraped_reviews")
+    c.execute("DROP TABLE IF EXISTS scraped_reviews")
     conn.commit()
     c.execute("""CREATE TABLE scraped_reviews ('brand_name', 'product_name', 'asin', 'price', 'overall_rating', 'reviewer_username', 'review_date', 'review_rating', 'review_text')""")
     conn.commit()

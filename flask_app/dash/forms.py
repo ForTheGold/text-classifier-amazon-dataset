@@ -4,13 +4,13 @@ from wtforms.validators import DataRequired
 from wtforms.widgets import TextArea
 
 class GenerateDataForm(FlaskForm):
-	submit = SubmitField('Generate New Data!')
+	submit1 = SubmitField('Generate A New Feature Set!')
 
 class ClassifyUserInputForm(FlaskForm):
 	user_review = StringField('Write your review here', 
 								widget=TextArea(),
 								validators=[DataRequired()])
-	submit = SubmitField('Check Your Review!')
+	submit2 = SubmitField('Check Your Review!')
 
 class ScrapeAmazonForm(FlaskForm):
 	user_url_input = StringField('Enter an Amazon Product URL to Scrape')

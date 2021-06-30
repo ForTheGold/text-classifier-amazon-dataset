@@ -2,8 +2,177 @@
 {% block content %}
 	<div class="container">
 		<div class="jumbotron">
-			<h1>Model</h1>
-			<p>We used a Naive Bayes classifier</p>
+			<div class="row">
+            	<div class="col-md-7">
+					<h1>Model and Preprocessing</h1>
+					<p>We cleaned our dataset and used it to train our model</p>
+				</div>
+				<div class="col-md-5">
+					<img src="../static/img/sentimentanalysis3.png" class="img-rounded" alt="Sentiment Analysis" width="300" height="250"/>
+				</div>
+			</div>
 		</div>
 	</div>
+
+	<div class="container">
+		<h2>Preprocessing</h2>
+		<hr />
+		<p>Our dataset is a collection of Amazon reviews that we used to train the model.  Amazon reviews may contain any type of lexicon including words that are misspelled, abbreviated, capitalized, contain punctuation, etc.  The first step is to normalize this lexicon so that items such as “I’m”, “Im”, “i’m” and “im” are not treated as different words.</p>
+		<h3>Tokenization</h3>
+		<hr />
+		<p>The first thing we need to do is to split the sentence into a python list of individual tokens or word boundaries that are separated in a smart way in order to process the text.</p>
+		<img src="../static/img/tokenization1.png" class="img-rounded img-responsive center-block" alt="Tokenization" />
+		<h4>Why is tokenization necessary?</h4>
+		<p>We could do something simple like split the sentence at each word space.  But what about periods at the end of the sentence.  We could split the words at a space or period, but what about questions marks and exclamation points?  We could split the words at the spaces and a set of predefined punctuation marks, but what about words like “Mr.”.  Do we want to keep the period?  This is where tokenization comes in.  The words are split in a very intelligent way.</p>
+		<img src="../static/img/tokenization2.png" class="img-rounded img-responsive center-block" alt="Tokenization" />
+
+		<h3>Cleaning and Normalization</h3>
+		<hr />
+		<p>Now that we have our tokens, it is necessary to take some time to clean the data so that we have as few repeat entries as possible.</p>
+
+		<img src="../static/img/cleaning1.png" class="img-rounded img-responsive center-block" alt="Cleaning" width="300" height="250" />
+
+		<ul>
+		<li><strong>Casing</strong> - The first step was to switch every letter of every token to lowercase, so that tokens such as “The” and “the” would not be treated as separate entries</li>
+		<li><strong>Removing Non Alphanumerics</strong> - Next all letters that were not alphanumeric were removed to prevent words such as “mr” and “mr.” from being treated as separate tokens</li>
+		<li><strong>Length</strong> - All tokens that were less than length 2 were also removed</li>
+		<li><strong>Stop Words</strong> - Stop words were removed</li>
+		<li><strong>Lemmatization</strong> - All words were lemmatized for greater normalization</li>
+		</ul>
+
+		<h4>What are Stop Words?</h4>
+		<img src="../static/img/stopwords1.jpg" class="img-rounded img-responsive center-block" alt="Stop Words" width="500" height="100" />
+
+		<p>Stop words are words that do not add a lot of meaning to the text such as “the”, “it”, “as” and “about”.  They may also include words that are often used sarcastically.  This means that they may have their true meaning or the opposite meaning.  Hence, they are removed.</p>
+
+		<h4>What is Lemmatization?</h4>
+		<img src="../static/img/lemmatization1.png" class="img-rounded img-responsive center-block" alt="Lemmatization" width="500" height="100" />
+		<p>The same word may come in many forms, such as: “eat”, “ate”, “eaten”, etc.  All of these words can be normalized to what are called lemmas so that they are not treated as separate tokens, but as the same token.</p>
+
+		<h2>Making the Featureset</h2>
+		<hr />
+		<p>We used a bag of words model in which the featureset was the presence or absence of the 3000 most commonly found words in the text.</p>
+
+		<h3>Labeled Data</h3>
+		<hr />
+		<img src="../static/img/labeleddata1.png" class="img-rounded img-responsive center-block" alt="Stop Words" width="500" height="100"/>
+		<p>Now that we have all of this processing to normalize the data finished, we need to create our labeled data set.  Only reviews of food products from Amazon that were rated as five stars or one star were used.  One star reviews were labeled as negative and five star reviews were labeled as positive.</p>
+		<p>Additionally, there were a great deal more positive reviews than negative reviews so 1000 of each type were randomly selected to ensure there was no bias in the model.</p>
+		<img src="../static/img/labeleddata2.png" class="img-rounded img-responsive center-block" alt="Stop Words" width="500" height="100" />
+
+		<p>Choose a new feature set by pressing the button.  <br />
+			Note: This will change the statistics about the current model below!  <strong>And it may take several minutes to complete!</strong></p>
+		<form method="POST" action="" >
+			{{ form1.hidden_tag() }}
+			{{ form1.submit1(class="btn btn-primary center-block") }}
+		</form>
+
+		<h3>Bag of Words Model</h3>
+		<hr />
+
+		<p>The feature set is the presence or absence of the 3000 most common words in all of the reviews.  This is done with a Python dictionary.  Each of the reviews is converted into a dictionary with 3000 entries.  Each dictionary key is a one of the 3000 most common words and the value is the boolean value of true or false corresponding to whether or not the review contains the word.</p>
+
+		<img src="../static/img/bagofwords1.png" class="img-rounded img-responsive center-block" alt="Cleaning" width="300" height="250" />
+
+		<p>Here are the words that are the most predictive for our current model.</p>
+
+		<table>
+			<tr>
+				<th colspan="10">Most informative Features (Lemmas)</th>
+			</tr>
+			{% for i in range(features | length) %}
+			 	{% if i % 10 == 0 %}<tr> {% endif %}
+					<td>{{ features[i][0] }}</td>
+				{% if i+9 % 10 == 0 %}</tr> {% endif %}
+			{% endfor %}
+		</table>
+
+		<br />
+
+		<p>This is referred to as a “bag of words” model because of the fact that the feature set does not take into account the order of the words, only the presence or absence of each word.  For instance, it is very different to say “The meat is good.  It is not bad” versus “The meat is bad.  It is not good.”  However, this difference is not taken into account in our model which only takes into account what words are present, not their order.</p>
+
+		<img src="../static/img/bagofwords2.jpeg" class="img-rounded img-responsive center-block" alt="Cleaning" width="300" height="250" />
+
+		<p>Here are the top ten most predictive words and their percentages for the current model.</p>
+
+		<table>
+			<tr>
+				<th>Feature</th>
+				<th>Sentiment</th>
+				<th>Certainty</th>
+			</tr>
+			{% for i in range(output_string_to_list | length) %}
+			 	{% if i % 10 == 0 %}
+			 		<tr> 
+						<td>{{ output_string_to_list[i][0] | upper }}{{ output_string_to_list[i][1:] }}</td>
+				{% endif %}
+				{% if i % 10 == 3 %}
+					
+						<td>{% if output_string_to_list[i] == "pos" %} Positive {% else  %} Negative {% endif %}</td>
+				{% endif %}
+				{% if i % 10 == 7 %}
+						<td>{{ output_string_to_list[i] }}%</td>
+					</tr>
+				{% endif %}
+
+			{% endfor %}
+		</table>
+
+		<h3>Naive Bayes Classifier</h3>
+		<hr />
+
+
+
+	</div>
+
+	<div class="container">
+		<p>The current model gets <strong>{{ accuracy }}%</strong> accuracy!</p>
+
+	</div>
+
+		<div class="container">
+		<form method="POST" action="">
+			{{ form2.hidden_tag() }}
+
+			<div class="form-group">
+				<span>{{ form2.user_review.label() }}</span><br />
+				{{ form2.user_review(rows="10", class="form-control") }}
+				<small class="form-text text-muted">Input some text to classify.</small>
+			</div>
+
+			{% if form2.user_review.errors %}
+				{% for error in form2.user_review.errors %}
+				 {{ error }}
+				{% endfor %}
+			{% endif %}
+
+			{{ form2.submit2(class="btn btn-primary") }}
+		</form>
+	</div>
+
+		<br />
+		<br />
+	<div class="container">
+		{% if messages2 %}
+			<table>
+				<tr>
+					<th>You Wrote</th>
+					<th>Classified As</th>
+				</tr>
+
+				{% for message in messages2 %}
+				 	<tr>
+						<td>{{ message[0] }}</td>
+						<td>{{ message[1] }}</td>
+					</tr>
+				{% endfor %}
+
+			</table>
+
+		{% endif %}
+
+	</div>
+	<br />
+	<br />
+	<br />
 {% endblock content %}

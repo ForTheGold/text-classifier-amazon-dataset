@@ -21,27 +21,28 @@
 	</div>
 
 	<hr />
-
-	<div class="container">
-		<h3>Reddit Thread Title: {{ reddit_data[0][0] }}</h3>
-	</div>
-
-	<hr />
-
-	<div class="container">
-				<table>
-					<tr>
-						<th>Comment</th>
-						<th>Classification</th>
-					</tr>
-
-					{% for i in range(reddit_data | length) %}
-					 	<tr>
-							<td>{{ reddit_data[i][1] }}</td>
-							<td>{% if our_classifications[i] == "pos" %} Positive {% else %} Negative {% endif %}</td>
-						</tr>
-					{% endfor %}
-
-				</table>
+	{% if reddit_data != "" %}
+		<div class="container">
+			<h3>Reddit Thread Title: {{ reddit_data[0][0] }}</h3>
 		</div>
+
+		<hr />
+	
+		<div class="container">
+					<table>
+						<tr>
+							<th>Comment</th>
+							<th>Classification</th>
+						</tr>
+
+						{% for i in range(reddit_data | length) %}
+						 	<tr>
+								<td>{{ reddit_data[i][1] }}</td>
+								<td>{% if our_classifications[i] == "pos" %} Positive {% else %} Negative {% endif %}</td>
+							</tr>
+						{% endfor %}
+
+					</table>
+			</div>
+	{% endif %}
 {% endblock content %}
