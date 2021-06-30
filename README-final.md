@@ -15,7 +15,7 @@ We selected this topic because the artificial meat industry is becoming increasi
 
 ## Source Data
 
-Our data set was pulled from the Amazon Grocery and Gourmet Food section (http://deepyeti.ucsd.edu/jianmo/amazon/index.html).  We are currently working through the process of determining the site from which we will pull the reviews without ratings.  
+Our data set was pulled from the Amazon Grocery and Gourmet Food section (http://deepyeti.ucsd.edu/jianmo/amazon/index.html).  We scraped Amazon's website to pull reviews and ratings for our visualization. 
 
 ## Goals
 
@@ -58,6 +58,9 @@ I plan to use a bag of words model with a Naive Bayes classifier for starters in
 
 ### Week 2 - Update on Progress
 We continued to clean and organize the data set to finalize the machine learning process and database.  We also started working on the dashboards and website we plan to create. Using Tableau, graphs will display static information regarding the correlation between months/years and ratings. We also are creating an interactive site that will allow a user to input review words, which will populate the predicted positive or negative rating.  This site will be available through Heroku.  Finally, work has begun on the slide deck for the final presentation.
+
+### Week 3 - Update on Progress
+We finalized the cleaning and organization of the data set to finalize the machine learning process and database.  We also continued working on the dashboards and website we have created. Using Tableau, graphs will display static information regarding the correlation between months/years and ratings. We also have created an interactive site that will allow a user to input review words, which will populate the predicted positive or negative rating.  This site will be available through Heroku.  Finally, work has continued on the slide deck for the final presentation.
 
 ## Dashboard
 We have identified possible graphs to reflect our information, such as a line graph and/or a heat map. This is still a work in progress; we plan to use Tableau.
