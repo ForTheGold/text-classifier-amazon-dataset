@@ -61,7 +61,7 @@ old:
 
 ## Image of ERD describing database tables - updated
 
-![QuickDBD3.png](Resources/QuickDBD3.png)
+![QuickDBD4.png](Resources/QuickDBD4.png)
 
 
 
