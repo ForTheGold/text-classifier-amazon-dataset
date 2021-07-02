@@ -23,6 +23,10 @@ The merged dataframes had many Nan's. Dropping them made it clear that there was
 
 - An ERD was created to describe the database tables. See image below. 
 
+- ERD updated to create 3 new tables: table of brands, table of products and table of reviews. Each brand has multiple products so the connection is one to many on the index_brand. each product has many reviews so the connection again is one to many on the asin. 
+
+- code will be updated to create the database based on the new table system. 
+
 
 ## Links to the data:
 
@@ -57,7 +61,7 @@ old:
 
 ## Image of ERD describing database tables - updated
 
-![QuickDBD2.png](Resources/QuickDBD2.png)
+![QuickDBD3.png](Resources/QuickDBD3.png)
 
 
 
