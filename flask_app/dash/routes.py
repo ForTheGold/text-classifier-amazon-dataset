@@ -123,7 +123,10 @@ def predictions():
 		reddit_data = ""
 		our_classifications = ""
 
-	return render_template('predictions.html', form=form, reddit_data=reddit_data, our_classifications=our_classifications, title='Predictions')
+	return render_template('predictions.html', form=form, 
+												reddit_data=reddit_data, 
+												our_classifications=our_classifications, 
+												title='Predictions')
 
 
 
