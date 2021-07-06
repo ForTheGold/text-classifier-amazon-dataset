@@ -18,13 +18,16 @@ from nltk.stem.wordnet import WordNetLemmatizer
 def create_new_feature_set():
 	data = []
 
-	with open("dash/static/data/groceries_trimmed.csv") as f:
-	    reader = csv.reader(f, delimiter=',')
-	    for i in reader:
-	        data.append(i)
-	f.close()
-
-	data = data[1:]
+	# with open("dash/static/data/groceries_trimmed.csv") as f:
+	#     reader = csv.reader(f, delimiter=',')
+	#     for i in reader:
+	#         data.append(i)
+	# f.close()
+	conn = sqlite3.connect("dash/static/data/reviewdb.db")
+	c = conn.cursor()
+	c.execute("""SELECT rating_g_review, text_g_review FROM groceries_review_table;""")
+	data = c.fetchall()
+	conn.close()
 
 	tokenizer = RegexpTokenizer(r'\w+')
 	stop_words = set(stopwords.words('english'))
@@ -36,9 +39,14 @@ def create_new_feature_set():
 	lemmatizer = WordNetLemmatizer()
 
 	for i in data:
-	    if i[0] == '5':
+	    if i[0] == 5 and i[1] is not None:
 	        filtered = []
-	        tokens = tokenizer.tokenize(i[1].lower())
+	        try:
+	        	tokens = tokenizer.tokenize(i[1].lower())
+	        except:
+	        	print(i)
+	        	break
+
 	        for j in tokens:
 	            j = regex.sub('', j)
 	            if len(j) > 2 and j not in stop_words:
@@ -47,8 +55,9 @@ def create_new_feature_set():
 
 	        if len(filtered) > 0:
 	            positive.append((filtered, 'pos'))
-	    else:
+	    elif i[0] == 1 and i[1] is not None:
 	        filtered = []
+
 	        tokens = tokenizer.tokenize(i[1].lower())
 	        for j in tokens:
 	            j = regex.sub('', j)
@@ -68,7 +77,7 @@ def create_new_feature_set():
 	for i in labeled_reviews:
 		labeled_reviews_joined.append((" ".join(i[0]), i[1]))
 
-	conn2 = sqlite3.connect("dash/static/data/review.db")
+	conn2 = sqlite3.connect("dash/static/data/reviewdb.db")
 	c2 = conn2.cursor()
 	
 	c2.execute("DROP TABLE IF EXISTS labeled_reviews")
@@ -85,7 +94,7 @@ def create_new_feature_set():
 
 def make_training_feature_set():
 
-	conn = sqlite3.connect("dash/static/data/review.db")
+	conn = sqlite3.connect("dash/static/data/reviewdb.db")
 	c = conn.cursor()
 
 	c.execute("SELECT * FROM labeled_reviews")
@@ -235,7 +244,7 @@ def scrape_amazon(main_page_url, headers):
     return data
 
 def write_reviews_to_db(data):
-    conn = sqlite3.connect("dash/static/data/review.db")
+    conn = sqlite3.connect("dash/static/data/reviewdb.db")
     c = conn.cursor()
     c.execute("DROP TABLE IF EXISTS scraped_reviews")
     conn.commit()
@@ -262,7 +271,7 @@ def scrape_reddit(url, headers):
     return (title, clean_comments)
 
 def write_to_reddit_thread_db(title, clean_comments):
-    conn = sqlite3.connect("dash/static/data/review.db")
+    conn = sqlite3.connect("dash/static/data/reviewdb.db")
     c = conn.cursor()
     c.execute("DROP TABLE IF EXISTS reddit_thread")
     c.execute("CREATE TABLE reddit_thread ('title', 'comment')")

@@ -24,7 +24,7 @@ def model():
 	if form.submit.data and form.validate():
 		if form.validate_on_submit():
 			classification = create_new_feature_set()
-			messages = ["A new dataset has been successfully generated."]
+			messages2 = ["A new dataset has been successfully generated."]
 			return redirect(url_for('model'))
 
 
@@ -56,7 +56,7 @@ def verification():
 		write_reviews_to_db(amazon_reviews)
 		return redirect(url_for('verification'))
 	try: 
-		conn = sqlite3.connect("dash/static/data/review.db")
+		conn = sqlite3.connect("dash/static/data/reviewdb.db")
 		c = conn.cursor()
 		c.execute("SELECT reviewer_username, review_date, review_rating, review_text FROM scraped_reviews")
 		amazon_data = c.fetchall()
@@ -101,7 +101,7 @@ def predictions():
 		return redirect(url_for('predictions'))
 
 	try:
-		conn = sqlite3.connect("dash/static/data/review.db")
+		conn = sqlite3.connect("dash/static/data/reviewdb.db")
 		c = conn.cursor()
 		c.execute("SELECT * FROM reddit_thread")
 		reddit_data = c.fetchall()
