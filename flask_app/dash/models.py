@@ -32,7 +32,7 @@ def create_new_feature_set():
 	positive = []
 	negative = []
 
-	regex = re.compile('[^a-zA-Z0-9]')
+	regex = re.compile('[^a-z0-9]')
 	lemmatizer = WordNetLemmatizer()
 
 	for i in data:

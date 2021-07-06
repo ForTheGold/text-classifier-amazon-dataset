@@ -28,3 +28,9 @@ tr:nth-child(even) {
     background-color: #599191 !important;
     color: #d7e6a3 !important;
 }
+
+.pdf {
+  width: 820px;
+  margin-left: auto ;
+  margin-right: auto ;
+}
