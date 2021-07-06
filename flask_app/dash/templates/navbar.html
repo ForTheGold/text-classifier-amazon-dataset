@@ -17,8 +17,9 @@
         <li {% if request.endpoint == "project" %} class="active"{% endif %}><a href="{{ url_for('project')}}">Project</a></li>
         <li {% if request.endpoint == "database" %} class="active"{% endif %}><a href="{{ url_for('database')}}">Database</a></li>
         <li {% if request.endpoint == "model" %} class="active"{% endif %}><a href="{{ url_for('model')}}">Model and Preprocessing</a></li>
-        <li {% if request.endpoint == "verification" %} class="active"{% endif %}><a href="{{ url_for('verification')}}">Amazon Data</a></li>
-        <li {% if request.endpoint == "predictions" %} class="active"{% endif %}><a href="{{ url_for('predictions')}}">Reddit Threads</a></li>
+        <li {% if request.endpoint == "verification" %} class="active"{% endif %}><a href="{{ url_for('verification')}}">Amazon Reviews</a></li>
+        <li {% if request.endpoint == "predictions" %} class="active"{% endif %}><a href="{{ url_for('predictions')}}">Reddit Comments</a></li>
+        <li {% if request.endpoint == "demo" %} class="active"{% endif %}><a href="{{ url_for('demo')}}">Write A Review</a></li>
         <li {% if request.endpoint == "visualizations" %} class="active"{% endif %}><a href="{{ url_for('visualizations')}}">Visualizations</a></li>
         <li {% if request.endpoint == "presentation" %} class="active"{% endif %}><a href="{{ url_for('presentation')}}">Presentation</a></li>
       </ul>

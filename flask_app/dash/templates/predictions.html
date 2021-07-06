@@ -14,7 +14,7 @@
 			<div class="form-group">
 				<span>{{ form.user_url_input.label() }}</span><br />
 				{{ form.user_url_input(class="form-control") }}
-				<small class="form-text text-muted">Enter Reddit Thread URL above</small>
+				<small class="form-text text-muted">Reddit thread URL should be of the form: https://www.reddit.com/r/vegan/comments/7s81qn/how_do_you_feel_about_fake_meat/</small>
 			</div>
 			{{ form.submit(class="btn btn-primary") }}
 		</form>
@@ -43,6 +43,7 @@
 						{% endfor %}
 
 					</table>
+				<br />
 			</div>
 	{% endif %}
 {% endblock content %}

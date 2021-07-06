@@ -71,7 +71,7 @@ def create_new_feature_set():
 	conn2 = sqlite3.connect("dash/static/data/review.db")
 	c2 = conn2.cursor()
 	
-	c2.execute("DROP TABLE labeled_reviews")
+	c2.execute("DROP TABLE IF EXISTS labeled_reviews")
 	c2.execute("CREATE TABLE labeled_reviews('review', 'label')")
 
 	for entry in labeled_reviews_joined:
@@ -235,7 +235,7 @@ def scrape_amazon(main_page_url, headers):
     return data
 
 def write_reviews_to_db(data):
-    conn = sqlite3.connect("dash/static/data/reviewdb.db")
+    conn = sqlite3.connect("dash/static/data/review.db")
     c = conn.cursor()
     c.execute("DROP TABLE IF EXISTS scraped_reviews")
     conn.commit()
@@ -262,7 +262,7 @@ def scrape_reddit(url, headers):
     return (title, clean_comments)
 
 def write_to_reddit_thread_db(title, clean_comments):
-    conn = sqlite3.connect("dash/static/data/reviewdb.db")
+    conn = sqlite3.connect("dash/static/data/review.db")
     c = conn.cursor()
     c.execute("DROP TABLE IF EXISTS reddit_thread")
     c.execute("CREATE TABLE reddit_thread ('title', 'comment')")

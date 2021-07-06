@@ -66,8 +66,8 @@
 		<p>Choose a new feature set by pressing the button.  <br />
 			Note: This will change the statistics about the current model below!  <strong>And it may take several minutes to complete!</strong></p>
 		<form method="POST" action="" >
-			{{ form1.hidden_tag() }}
-			{{ form1.submit1(class="btn btn-primary center-block") }}
+			{{ form.hidden_tag() }}
+			{{ form.submit(class="btn btn-primary center-block") }}
 		</form>
 
 		<h3>Bag of Words Model</h3>
@@ -149,48 +149,7 @@
 
 	</div>
 
-	<div class="container">
-		<form method="POST" action="">
-			{{ form2.hidden_tag() }}
 
-			<div class="form-group">
-				<span>{{ form2.user_review.label() }}</span><br />
-				{{ form2.user_review(rows="10", class="form-control") }}
-				<small class="form-text text-muted">Input some text to classify.</small>
-			</div>
-
-			{% if form2.user_review.errors %}
-				{% for error in form2.user_review.errors %}
-				 {{ error }}
-				{% endfor %}
-			{% endif %}
-
-			{{ form2.submit2(class="btn btn-primary") }}
-		</form>
-	</div>
-
-		<br />
-		<br />
-	<div class="container">
-		{% if messages2 %}
-			<table>
-				<tr>
-					<th>You Wrote</th>
-					<th>Classified As</th>
-				</tr>
-
-				{% for message in messages2 %}
-				 	<tr>
-						<td>{{ message[0] }}</td>
-						<td>{{ message[1] }}</td>
-					</tr>
-				{% endfor %}
-
-			</table>
-
-		{% endif %}
-
-	</div>
 	<br />
 	<br />
 	<br />

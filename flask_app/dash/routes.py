@@ -3,7 +3,7 @@ from dash.forms import ClassifyUserInputForm, GenerateDataForm, ScrapeAmazonForm
 from dash import app
 from dash.models import *
 
-messages2 = []
+messages = []
 
 @app.route('/')
 @app.route('/project')
@@ -16,33 +16,21 @@ def database():
 
 @app.route('/model', methods=['GET', 'POST'])
 def model():
-	messages1 = []
-
-	form1 = GenerateDataForm()
-	form2 = ClassifyUserInputForm()
+	messages2 = []
+	form = GenerateDataForm()
 
 	output_string_to_list = output_string[26:].split()
 
-	if form1.submit1.data and form1.validate():
-		if form1.validate_on_submit():
+	if form.submit.data and form.validate():
+		if form.validate_on_submit():
 			classification = create_new_feature_set()
-			messages1 = ["A new dataset has been successfully generated."]
+			messages = ["A new dataset has been successfully generated."]
 			return redirect(url_for('model'))
 
-	if form2.submit2.data and form2.validate():
-		if form2.validate_on_submit():
-			classification = classify_text(form2.user_review.data)
-			if classification == "pos":
-				classification = "positive"
-			else:
-				classification = "negative"
-			messages2.append((form2.user_review.data, classification))
-			return redirect(url_for('model'))
 
-	return render_template('model.html', form1=form1, 
-												messages1=messages1,
-												form2=form2,
-												messages2=messages2, 
+
+	return render_template('model.html', form=form, 
+												messages=messages2,
 												accuracy=accuracy, 
 												features=features, 
 												output_string_to_list=output_string_to_list, 
@@ -68,7 +56,7 @@ def verification():
 		write_reviews_to_db(amazon_reviews)
 		return redirect(url_for('verification'))
 	try: 
-		conn = sqlite3.connect("dash/static/data/reviewdb.db")
+		conn = sqlite3.connect("dash/static/data/review.db")
 		c = conn.cursor()
 		c.execute("SELECT reviewer_username, review_date, review_rating, review_text FROM scraped_reviews")
 		amazon_data = c.fetchall()
@@ -113,7 +101,7 @@ def predictions():
 		return redirect(url_for('predictions'))
 
 	try:
-		conn = sqlite3.connect("dash/static/data/reviewdb.db")
+		conn = sqlite3.connect("dash/static/data/review.db")
 		c = conn.cursor()
 		c.execute("SELECT * FROM reddit_thread")
 		reddit_data = c.fetchall()
@@ -129,6 +117,20 @@ def predictions():
 												title='Predictions')
 
 
+@app.route('/demo', methods=['GET', 'POST'])
+def demo():
+	form = ClassifyUserInputForm()
+
+	if form.validate_on_submit():
+		classification = classify_text(form.user_review.data)
+		if classification == "pos":
+			classification = "positive"
+		else:
+			classification = "negative"
+		messages.append((form.user_review.data, classification))
+		return redirect(url_for('demo'))
+
+	return render_template('demo.html', title='Demonstration', form=form, messages=messages)
 
 @app.route('/visualizations')
 def visualizations():
