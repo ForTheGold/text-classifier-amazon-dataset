@@ -107,13 +107,19 @@ def predictions():
 		reddit_data = c.fetchall()
 
 		our_classifications = [classify_text(review[1]) for review in reddit_data]
+		total_comment_count = len(our_classifications)
+		positive_comment_count = len([classification for classification in our_classifications if classification == "pos"])
+		negative_comment_count = len([classification for classification in our_classifications if classification == "neg"])
 	except:
 		reddit_data = ""
 		our_classifications = ""
 
 	return render_template('predictions.html', form=form, 
 												reddit_data=reddit_data, 
-												our_classifications=our_classifications, 
+												our_classifications=our_classifications,
+												total_comment_count=total_comment_count,
+												positive_comment_count=positive_comment_count,
+												negative_comment_count=negative_comment_count,
 												title='Predictions')
 
 

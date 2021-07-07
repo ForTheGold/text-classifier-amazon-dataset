@@ -30,7 +30,13 @@
 	<hr />
 	{% if reddit_data != "" %}
 		<div class="container">
-			<h3>Reddit Thread Title: {{ reddit_data[0][0] }}</h3>
+			<p><strong>Title: {{ reddit_data[0][0] }} </strong><br />
+				Total Number of Comments: {{ total_comment_count }} <br />
+				Number of Positive Comments: {{ positive_comment_count }} <br />
+				Number of Negative Comments: {{ negative_comment_count }} <br />
+				Percentage of Positive Comments: {{ ((positive_comment_count / total_comment_count) * 100) | int }}% <br />
+				Percentage of Negative Comments: {{ ((negative_comment_count / total_comment_count) * 100) | int }}%
+			</p>
 		</div>
 
 		<hr />
