@@ -76,17 +76,17 @@ Finally, from the word clouds and the table analysis of the reviews, the stakeho
 
 #### Limitations
 The limitations we experienced during our analysis include:
-•	Our time frame was rushed; as were learning about the limitations of our data set, we were already using it. 
-•	Since our initial data set was limited, we were not necessarily focused on the best data set available.  We operated with what we had and made the most of it due to time and resource constraints, including but not limited to, computer capacity and also eventually being blocked by Amazon during our web scraping.
-•	Finally, the algorithm does not consider the order of words (ie food tastes great v great tasting food).
+ - Our time frame was rushed; as were learning about the limitations of our data set, we were already using it. 
+ - Since our initial data set was limited, we were not necessarily focused on the best data set available.  We operated with what we had and made the most of it due to time and resource constraints, including but not limited to, computer capacity and also eventually being blocked by Amazon during our web scraping.
+ - Finally, the algorithm does not consider the order of words (ie food tastes great v great tasting food).
 
 #### Further Analysis
 If we were to continue future analysis, we would:
-•	Include more interactive visualizations for the end user.
-•	Scrape in a larger data set, as available.
-•	Pull in location data of reviews to further enable stakeholders’ insight into consumer sentiment by location. This would allow for more market focused guidance. 
+ - Include more interactive visualizations for the end user.
+ - Scrape in a larger data set, as available.
+ - Pull in location data of reviews to further enable stakeholders’ insight into consumer sentiment by location. This would allow for more market focused guidance. 
 
 #### Ways to Improve Project
-•	We would search for a more accurate algorithm
-•	We would have our algorithm consider word order
-•	Finally, we would host our website on a server
+ - We would search for a more accurate algorithm
+ - We would have our algorithm consider word order
+ - Finally, we would host our website on a server
