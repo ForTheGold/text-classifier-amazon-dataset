@@ -44,17 +44,41 @@ the overall is the rating number between one and five. We are focusing on 1 and 
 
 The algorithm uses a bag of words model and a Naive Bayes classifier.  
 
+
+### Preprocessing and Normalization
+
+The following preprocessing and normalization steps were taken before creating the labeled data set.  Each is explained in greater detail below.
+
+* Tokenized
+* Converted to Lowercase
+* Removed Non Alphanumerics
+* Removed Items Less Than Two Characters
+* Removed Stop Words
+* Lemmatized
+
+The data was tokenized which means that each sentence was divided into a Python list where the entries are each of the items in the sentence.  Items meaning words that are split smartly so that words such as Mr. are kept together, but periods at the end of the sentence are treated as their own item.  
+  
+Everything was converted to lowercase.  
+  
+Everything that was not an alphanumeric was removed leaving only numbers and letters.  
+  
+All tokens that were less than two characters in length were removed.  
+  
+Stop words are words such as "in", "for", "that", and "the" which do not add a lot of meaning to the text.  Stop words were also removed.  
+  
+The words were them lemmatized which means that the same words of different forms were normalized to the same form.  An example of this would be words like "eat", "eats", "ate" and "eaten" are all normalzed to "eat".
+
+### Feature Set
+
+After we have our set of normalized words, we had to create our labeled data set to feed in the algorithm.  Each of the reviews was converted into a Python dictionary with words as the keys and boolean values of as the values.  The keys of the dictionary was the entire feature set which consisted of the 3000 most common words found in all of the reviews.  The boolean values were set to True if the review contained that word and False otherwise.  
+  
+Next, we shuffled the positive reviews and created a list of 1000 positive and 1000 negative reviews which was again shuffled.  This list of 2000 reviews which is each a hashmap of presence or absence in each individual review of the 3000 most common words in all of the reviews is the feature set that was used to train the model.  Note that this "bag of words" model does not take into consideration word order.
+
 ### Machine Learning
 
-The data was cleaned and exported to this csv file ( https://drive.google.com/file/d/1gEXXLB23iYxTxxyPFyhmQ-dfvjoEhTOl/view?usp=sharing ).  
-
-The file was read and data was stored in an array, and the header was subsequently removed.  The data was cleaned for better processing, which included the removal of “stop words” which are words that do not add a lot of meaning to the content such as words like “the”, “in”, “at”, etc.  The data was also normalized by converting everything to lowercase.
-
-Next, the data was tokenized which means splitting it by word and then a list of tuples was created which contains two items.  The first item is the list of strings of words contained within the text, and the second item is either the string “pos” or the string “neg”.  We worked with a large dataset of Amazon reviews; to help increase the processing speed, five star reviews were maintained as positive and one star reviews were maintained as negative.  All of the two, three and four star reviews were removed during the preprocessing step.
-
-The positive reviews were shuffled for randomness; the same number of positive and negative reviews were included in one giant list.  The large list was then shuffled, which contains 809,640 items, half of which are positive and half of which are negative reviews.  
-
-The bag of words model with a Naive Bayes classifier was used to classify the texts.  We experienced 82% accuracy with this model.  
+A Naive Bayes classifier was used to train the model.  The Bayes model works on the equation P(A | B) = P(B | A) * P(A) / P(B).  The algorithm works by taking in the labeled data and slowly moving each of the words more positive if the word appears in a positive review and more negative if the word appears in a negative review.  At the end of this training, the alogrithm is left with percentages for how positive or negative each word is.  
+  
+We then make our naive assumption.  Rather than calculating the full review text, we calculate each of the words in the review and multiply the probabilities together.  For example, rather than caluclating P(fake meat is disgusting | Positive) we would calculate P(fake | Positive) * P(meat | Positive) * P(disgusting | Positive) (Stop word removed).  We do the same for the negative probability and then decide which is larger.  This is how the algorithm classifies reviews.
 
 ### Interactive Website/Dashboard
 
@@ -66,6 +90,10 @@ ADD TABLEAU SCREENSHOTS
 
 ## Presentation
 A copy of the draft slides has been uploaded to our repository.  You can also link to the presentation here ADD LINK
+
+## Dashboard
+
+We created a dashboard that can be found 
 
 ### Conclusion
 #### Results
