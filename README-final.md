@@ -86,8 +86,12 @@ LINK WEBSITE OR ADD SCREENSHOTS ESPECIALLY OF INTERACTIVE PORTIONS
 
 
 ## Visualizations
-ADD TABLEAU SCREENSHOTS
-
+### Price v. Year
+![Price v. Year](images/pricevyr.png)
+### Rating v. Year
+![Rating v. Year](images/ratingvyr.png)
+### Review v. Price per Year by Brand
+![Review v. Price per Year by Brand](images/rvwvprice.png)
 ## Presentation
 A copy of the draft slides has been uploaded to our repository.  You can also link to the presentation here ADD LINK
 
