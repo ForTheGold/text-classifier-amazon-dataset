@@ -93,7 +93,48 @@ A copy of the draft slides has been uploaded to our repository.  You can also li
 
 ## Dashboard
 
-We created a dashboard that can be found 
+The dashboard consists of eight pages that demostrate the work that we have put into this project.  These pages include:
+
+* Project
+* Database
+* Machine Learning Model
+* Amazon Review Scraper
+* Reddit Thread Scraper
+* Review Classsifier
+* Visualizations
+* Presentation
+
+### Project Page
+
+The project page gives and overview of the project, the questions to be answered, and the goals of the project.
+
+### Database Page
+
+The database page includes information about where the data was collected from as well as how it was stored in the database.
+
+### Machine Learning Model
+
+The machine learning page includes information about the preprocessing of the data, the featureset creation, the training of the model, and the way in which the model predicts information.  This is the first page with an interactive feature which allows the user to use an alternate sample to train the model.  All of the tables on this page as well as the accuracy will be updated dynamically based upon the new sample of data.
+
+### Amazon Review Scraper
+
+This page allows the user to enter an Amazon product page and then it will scrape some information about the product such as the title and price as well as the first few pages of reviews.  The reviews will also be classified by the algorithm and the classification displayed in a table.
+
+### Reddit Thread Scraper
+
+This page allows the user to enter a Reddit thread.  The comments will be scraped from the thread and classified by the alogrithm.  Statistics are then calculated about the thread such as the number of reviews, the number of positive and negative reviews as well as the percentage of positive and negative reviews.
+
+### Review classifier
+
+The next page allows the user to enter in any text that he or she would like and the algoirthm will classify it and display the text as well as the classification.
+
+### Visualizations
+
+The next page contains an interactive image carousel of several of the visualizations that we created throughout the completion of the project.
+
+### Presentation
+
+The final page shows the presentation, and it is downloadable as a PDF or PPTX document.
 
 ### Conclusion
 #### Results
