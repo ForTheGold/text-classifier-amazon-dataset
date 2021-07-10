@@ -14,31 +14,110 @@ The topic of our project involves artificial meat review predictions.
 
 We selected this topic because the artificial meat industry is becoming increasingly popular as of late.  We find it the industry very interesting and want to understand how consumer experience and resulting reviews can predict ratings. After pulling and cleaning our data set from Amazon, we used the Natural Language Processing machine learning model to train a sentiment classifier. During the cleaning process, both five and one star reviews will be maintained, while two, three and four star ratings will be removed.  Next, we will pull reviews without ratings and direct the machine to predict the ratings based on the analysis of the reviews.  
 
-## Source Data
+## Data Source
 
-Our data set was pulled from the Amazon Grocery and Gourmet Food section (http://deepyeti.ucsd.edu/jianmo/amazon/index.html).  We scraped Amazon's website to pull reviews and ratings for our visualization. 
+We used three main sources of data:
+
+- Our initial dataset was pulled from the Amazon Grocery and Gourmet Food section from the computer science lab website of Dr.Jianmo Ni, at UCSD (http://deepyeti.ucsd.edu/jianmo/amazon/index.html). This dataset was of groceries. 
+- We scraped Amazon's website. This data included fake meat brands only. 
+- We scraped Reddit reviews. This data was of fake meat reviews only as well. 
+
+
+## Data Content
+
+### Image of data content:
+
+![data_content.PNG](Resources/data_content.PNG)
+
+We wanted a dataset that had all of the columns mentioned in the image above and most importantly, the review text as well as the product and price information because we wanted to focus only on fake meat reviews. Since the dataset from UCSD had groceries reviews but no product and brand information, we tried to merge it with the metadata that was supposed to belong to it. 
+
+The general groceries dataset from UCSD had more than 5 million reviews. After cleaning the data we had more than 1 million reviews. The metadata had a similar number initially but after choosing only the fake meat reviews, the metadata set had only 116 reviews. Then when we merged the UCSD Amazon data with the metadata we were left with only 12 rows. We tried many different variations of merge, join, concatinate, with an inner, outer, left joins with no success. The only common column in these datasets was the asin which is the Amazon’s product number. When we looked further into the data we found that the asin in one of the datasets was made of letters and digits and the other one was digits only so this explained why the merging of these datasets did not work. 
+
+So we decided to shift to scraped data from Amazon website. When scraping we had to input multiple url’s to get the data. We got all the necessary information and used it for visualizations. 
+Scraped data was specifically about fake meat products. 
+
+The reddit reviews did not have star ratings. We scraped the reddit reviews about fake meat to show that our machine learning model could predict if a review is positive or negative therefore expanding the number of reviews that store owners could use to help them in understanding how people feel about different fake meat products and ultimately, help them decide which brands and products they may want to sell in their stores. 
+
+
+## Data Cleaning
+
+We dropped columns that were not relevant for our goal:(columns that were dropped were: verified, reviewer name, summary of the review text, unix review time,(vote, image and style - had little data in them)).
+
+We added the review length column because we were going to find out if there was a connection between the length of a review and its sentiment (We ended up not using that). This column showed the number of words in each review. 
+
+We dropped duplicate rows, that is rows that all data was identical were dropped. 
+We narrowed the data to include only the 1 and 5 starred reviews so the difference between the positive and negative was more obvious. 
+We trimmed the 5 star reviews from more than 3 million reviews to 600,000 to match the number of reviews we had for 1 star to feed a balanced set into the machine learning model. 
+
+
+## Database 
+
+We used Sqlite and sqlalchemy to create the database. This was a local database that is suitable for the development stage of a project. 
+We interacted with the database using python, and table plus. 
+Below is an image of the ERD we created, showing the tables in the database. The first one is the data from UCSD Amazon general groceries. (we did not include the metadata because we ended up not using it.) The three in the middle are from the Amazon scraped data. The first one is of the brands. The second is the products. Since each brand has several products, the connection is one to many. Since each product has multiple reviews the connection between the product and the review table was also one to many. Lastly we have the reddit thread table with Reddit reviews. 
+
+
+## Link to the data files:
+
+### reviewdb.db: sqlite database which includes 5 tables: groceries_reviews is the original dataset. brand, product and review tables are from the scraped amazon data and reddit_thread is from the Reddit scraped data: 
+
+https://drive.google.com/file/d/1dmxUiRXfJX1dMDdqdZdfr-iHuozO44Q1/view?usp=sharing
+
+
+
+### Image of ERD describing database tables
+
+![QuickDBD5.PNG](Resources/QuickDBD5.PNG)
+
+
+### images of database tables in table plus:
+
+#### groceries_review_table
+
+![groceries_review_table.PNG](Resources/groceries_review_table.PNG)
+
+
+#### brand_table
+
+![brand_table.PNG](Resources/brand_table.PNG)
+
+
+#### product_table
+
+![product_table.PNG](Resources/product_table.PNG)
+
+
+#### review_table
+
+![review_table.PNG](Resources/review_table.PNG)
+
+
+#### reddit_thread table
+
+![reddit_thread.PNG](Resources/reddit_thread.PNG)
+
+
+
+### Image of join query on table plus
+
+![join.PNG](Resources/join.PNG)
+
+
 
 ## Goals
 
-In this project we will use a Natural Language Processing machine learning model to train a sentiment classifier on an Amazon dataset of Grocery and Gourmet Food reviews (https://jmcauley.ucsd.edu/data/amazon/) containing over 1 million reviews.  
+In this project the goal was to use a Natural Language Processing machine learning model to train a sentiment classifier on an Amazon dataset of Grocery and Gourmet Food reviews (https://jmcauley.ucsd.edu/data/amazon/) containing over 1 million reviews.  
 
-The goal of this classifier is to predict user sentiment (positive or negative) for fake meat products.  Upon having ratings predicted based on the reviews through NLP, We believe this analysis will help store owners identify which fake meat brands to sell. Having access to a model to predict ratings will allow the stakeholder to understand how reviews affect ratings and, in turn, impact future sales of fake meat products.
+The questions our team hoped to answer with this data:
+We wanted to collect information about fake meat and provide it to stakeholders so they can make informed decisions. We wanted to provide a better understanding of how people feel about fake meat products:
+- Did a fake meat product receive a positive or negative review?
+- What are some keywords that users use to describe specific products, which may provide insight into what characterizes a specific product in the eyes of reviewers. 
+- Did the price of these fake meat products change over time?
+- Did the rating of these products change over time?
 
-## Database NEED TO ADD SCREEN SHOTS AND COMPLETE SECTION
+All of this information would be provided to groceries store owners to help them decide which products and brands would be best to sell in their stores. 
 
-Link to Google doc:
 
-groceries_trimmed.csv:
-
-https://drive.google.com/file/d/1RrqXXbHTOJ8rPADNauFVRPBzMXwekjYP/view?usp=sharing
-
-The mockup database format for now is:
-
-columns:
-
-index, overall, reviewText
-
-the overall is the rating number between one and five. We are focusing on 1 and 5 only. The review Text is the review content that we will analyze using NLP.
 
 ## Algorithm
 
