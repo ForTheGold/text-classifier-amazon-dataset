@@ -185,6 +185,7 @@ def get_features():
 def scrape_amazon(main_page_url, headers):
     main_page = requests.get(main_page_url, headers=headers)
     main_page_soup = BeautifulSoup(main_page.content, 'html.parser')
+    time.sleep(2)
     print(main_page_soup.prettify())
     data = []
     
@@ -224,6 +225,7 @@ def scrape_amazon(main_page_url, headers):
     for review_url in review_urls:
         review_page = requests.get(review_url, headers=headers)
         review_page_soup = BeautifulSoup(review_page.content, 'html.parser')
+        time.sleep(1)
         username = review_page_soup.findAll('span', {'class': 'a-profile-name'})
         date = review_page_soup.findAll('span', {'data-hook': 'review-date'})
         rating = review_page_soup.find_all('i', {'data-hook': 'review-star-rating'})

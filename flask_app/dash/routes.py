@@ -95,7 +95,10 @@ def predictions():
 	form = ScrapeRedditForm()
 
 	if form.validate_on_submit():
-		headers = {'User-Agent': 'Mozilla/5.0'}
+		headers = {'User-Agent':"""Mozilla/5.0 (X11; Linux x86_64)
+               				 AppleWebKit/537.36 (KHTML, like Gecko)
+                   			 Chrome/44.0.2403.157 Safari/537.36""",
+                           'Accept-Language': 'en-US, en;q=0.5'}
 		(title, clean_comments) = scrape_reddit(form.user_url_input.data, headers)
 		write_to_reddit_thread_db(title, clean_comments)
 		return redirect(url_for('predictions'))
