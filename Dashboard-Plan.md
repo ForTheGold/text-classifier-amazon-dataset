@@ -35,7 +35,51 @@ then a slide showing how the sentiment for the brand changes with time by depict
 
 ![](/Resources/Dashboard-2.PNG)
 
-# Week 3 - Dashboard Template
+# Week 3  & 4 - Dashboard Template
 
-Continue to work on Dashboard for Tableau.
-Will use scraping data from 5 different brands to generate figures for dashboard.
+Will use scraping data from 5 different brands to generate figures for dashboard - scrapping data from an average of 3 products per brand:
+
+![](/Resources/project-list.PNG)
+
+Decided to create three template visualizations: 
+1. Word cloud to show 10 most frequent used words in negative and positive reviews per brand:
+
+    ![](/Resources/Boca-BYM-neg.PNG)
+
+    ![](/Resources/BYM-pos-neg.PNG)
+
+    ![](/Resources/Boca-pos-neg.PNG)
+
+    ![](/Resources/Gardein-pos-neg.PNG)
+
+    ![](/Resources/Quorn-pos-neg.PNG)
+
+    ![](/Resources/Tofurky-pos-neg.PNG)
+
+
+2. Table to show frequency with which top 10 words appeared in all product negative and positve reviews per brand.  
+
+    ![](/Resources/top10-neg.PNG)
+
+    ![](/Resources/top-10-pos.PNG)
+
+3. Plot of average price and average rating evolution over time (per year) - Tiffany designed this:
+
+    ![](/Resources/Review-price-evolution.PNG)
+
+Created word cloud by taking text of reviews in csv format (obtained from Tiffany) - ~1000 total reviews (~200 per) - note that there were 834 positive reviews and only 173 negative reviews - and converting text to columns.  
+
+Then filtered out CSV file to only contain 1) reviews with ratings of 1 or 2 (negative reviews) and 2) reviews with ratings of 4 or 5 (positive reviews) to create two new CSV files.
+
+     ![](r1-2-scraped_reviews-text-to-columns.csv)
+
+     ![](r4-5-scraped_reviews-text-to-columns.csv)
+
+Next each csv file was saved as unicode text and imported as a data source into tableau.  
+
+All figures were created in tableau.
+
+Stop words were filtered out using a list of words taken from: http://xpo6.com/list-of-english-stop-words/
+
+Then a filter was applied to only show the top 10 most frequent words for each brand.
+
