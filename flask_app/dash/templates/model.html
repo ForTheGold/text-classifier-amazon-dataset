@@ -15,135 +15,148 @@
 	</div>
 
 	<div class="container">
-		<h2>Preprocessing</h2>
-		<hr />
-		<p>Our dataset is a collection of Amazon reviews that we used to train the model.  Amazon reviews may contain any type of lexicon including words that are misspelled, abbreviated, capitalized, contain punctuation, etc.  The first step is to normalize this lexicon so that items such as “I’m”, “Im”, “i’m” and “im” are not treated as different words.</p>
-		<img src="../static/img/sentimentanalysis4.jpg" class="img-rounded img-responsive center-block" alt="Lemmatization" width="500" height="100" />
+		<div class="dbp">
+			<h2>Preprocessing</h2>
+			<hr />
+			<p>Our dataset is a collection of Amazon reviews that we used to train the model.  Amazon reviews may contain any type of lexicon including words that are misspelled, abbreviated, capitalized, contain punctuation, etc.  The first step is to normalize this lexicon so that items such as “I’m”, “Im”, “i’m” and “im” are not treated as different words.</p>
+			<img src="../static/img/sentimentanalysis4.jpg" class="img-rounded img-responsive center-block" alt="Lemmatization" width="500" height="100" />
+		</div>
+		<br /> <br />
+		<div class="dbp dbc">
 		<h3>Tokenization</h3>
-		<hr />
-		<p>The first thing we need to do is to split the sentence into a python list of individual tokens or word boundaries that are separated in a smart way in order to process the text.</p>
-		<img src="../static/img/tokenization1.png" class="img-rounded img-responsive center-block" alt="Tokenization" />
-		<h4>Why is tokenization necessary?</h4>
-		<p>We could do something simple like split the sentence at each word space.  But what about periods at the end of the sentence.  We could split the words at a space or period, but what about questions marks and exclamation points?  We could split the words at the spaces and a set of predefined punctuation marks, but what about words like “Mr.”.  Do we want to keep the period?  This is where tokenization comes in.  The words are split in a very intelligent way.</p>
-		<img src="../static/img/tokenization2.png" class="img-rounded img-responsive center-block" alt="Tokenization" />
+			<hr />
+			<p>The first thing we need to do is to split the sentence into a python list of individual tokens or word boundaries that are separated in a smart way in order to process the text.</p>
+			<img src="../static/img/tokenization1.png" class="img-rounded img-responsive center-block" alt="Tokenization" />
+			<h4>Why is tokenization necessary?</h4>
+			<p>We could do something simple like split the sentence at each word space.  But what about periods at the end of the sentence.  We could split the words at a space or period, but what about questions marks and exclamation points?  We could split the words at the spaces and a set of predefined punctuation marks, but what about words like “Mr.”.  Do we want to keep the period?  This is where tokenization comes in.  The words are split in a very intelligent way.</p>
+			<img src="../static/img/tokenization2.png" class="img-rounded img-responsive center-block" alt="Tokenization" />
+		</div>
+		<br /> <br />
+		<div class="dbp">
+			<h3>Cleaning and Normalization</h3>
+			<hr />
+			<p>Now that we have our tokens, it is necessary to take some time to clean the data so that we have as few repeat entries as possible.</p>
 
-		<h3>Cleaning and Normalization</h3>
-		<hr />
-		<p>Now that we have our tokens, it is necessary to take some time to clean the data so that we have as few repeat entries as possible.</p>
+			<img src="../static/img/cleaning1.png" class="img-rounded img-responsive center-block" alt="Cleaning" width="300" height="250" />
 
-		<img src="../static/img/cleaning1.png" class="img-rounded img-responsive center-block" alt="Cleaning" width="300" height="250" />
+				<br />
+
+			<ul>
+				<li><strong>Casing</strong> - The first step was to switch every letter of every token to lowercase, so that tokens such as “The” and “the” would not be treated as separate entries</li>
+				<li><strong>Removing Non Alphanumerics</strong> - Next all letters that were not alphanumeric were removed to prevent words such as “mr” and “mr.” from being treated as separate tokens</li>
+				<li><strong>Length</strong> - All tokens that were less than length 2 were also removed</li>
+				<li><strong>Stop Words</strong> - Stop words were removed</li>
+				<li><strong>Lemmatization</strong> - All words were lemmatized for greater normalization</li>
+			</ul>
+			<h4>What are Stop Words?</h4>
+			<img src="../static/img/stopwords1.jpg" class="img-rounded img-responsive center-block" alt="Stop Words" width="500" height="100" />
+			<br />
+			<p>Stop words are words that do not add a lot of meaning to the text such as “the”, “it”, “as” and “about”.  They may also include words that are often used sarcastically.  This means that they may have their true meaning or the opposite meaning.  Hence, they are removed.</p>
+			<h4>What is Lemmatization?</h4>
+			<img src="../static/img/lemmatization1.png" class="img-rounded img-responsive center-block" alt="Lemmatization" width="500" height="100" />
+			<p>The same word may come in many forms, such as: “eat”, “ate”, “eaten”, etc.  All of these words can be normalized to what are called lemmas so that they are not treated as separate tokens, but as the same token.</p>
+		</div>
+		<br /> <br />
+		<div class="dbp dbc">
+			<h2>Making the Featureset</h2>
+			<hr />
+			<p>We used a bag of words model in which the featureset was the presence or absence of the 3000 most commonly found words in the text.</p>
+			<h3>Labeled Data</h3>
+			<hr />
+			<img src="../static/img/labeleddata1.png" class="img-rounded img-responsive center-block" alt="Stop Words" width="500" height="100"/>
+			<p>Now that we have finished the processing to normalize the data, we need to create our labeled data set.  Only reviews of food products from Amazon that were rated as five stars or one star were used.  One star reviews were labeled as negative and five star reviews were labeled as positive.</p>
+			<p>Additionally, there were a great deal more positive reviews than negative reviews so 1000 of each type were randomly selected to ensure there was no bias in the model.</p>
+			<img src="../static/img/labeleddata2.png" class="img-rounded img-responsive center-block" alt="Stop Words" width="500" height="100" />
+			<br />
+			<p>Choose a new feature set by pressing the button.  <br />
+				Note: This will change the statistics about the current model below!  <strong>And it may take several minutes to complete!</strong></p>
+			<form method="POST" action="" >
+				{{ form.hidden_tag() }}
+				{{ form.submit(class="btn btn-primary center-block") }}
+			</form>
+		</div>
+		<br /> <br />
+		<div class="dbp">
+			<h3>Bag of Words Model</h3>
+			<hr />
+
+			<p>A Python dictionary is used to hold the feature set, which denotes the presence or absence of the 3000 most common words in all of the reviews.  Each of the reviews is converted into a dictionary with 3000 entries.  Each dictionary key is a one of the 3000 most common words and the value is the boolean value of true or false corresponding to whether or not the review contains the word.</p>
+
+			<img src="../static/img/bagofwords1.png" class="img-rounded img-responsive center-block" alt="Cleaning" width="300" height="250" />
+
+			<p>Here are the words that are the most predictive for our current model.</p>
+
+			<table>
+				<tr>
+					<th colspan="10">Most informative Features (Lemmas)</th>
+				</tr>
+				{% for i in range(features | length) %}
+				 	{% if i % 10 == 0 %}<tr> {% endif %}
+						<td>{{ features[i][0] }}</td>
+					{% if i+9 % 10 == 0 %}</tr> {% endif %}
+				{% endfor %}
+			</table>
 
 			<br />
 
-		<ul>
-			<li><strong>Casing</strong> - The first step was to switch every letter of every token to lowercase, so that tokens such as “The” and “the” would not be treated as separate entries</li>
-			<li><strong>Removing Non Alphanumerics</strong> - Next all letters that were not alphanumeric were removed to prevent words such as “mr” and “mr.” from being treated as separate tokens</li>
-			<li><strong>Length</strong> - All tokens that were less than length 2 were also removed</li>
-			<li><strong>Stop Words</strong> - Stop words were removed</li>
-			<li><strong>Lemmatization</strong> - All words were lemmatized for greater normalization</li>
-		</ul>
+			<p>This is referred to as a “bag of words” model because of the fact that the feature set does not take into account the order of the words, only the presence or absence of each word.  For instance, it is very different to say “The meat is good.  It is not bad” versus “The meat is bad.  It is not good.”  However, this difference is not taken into account in our model which only takes into account what words are present, not their order.</p>
 
-		<h4>What are Stop Words?</h4>
-		<img src="../static/img/stopwords1.jpg" class="img-rounded img-responsive center-block" alt="Stop Words" width="500" height="100" />
-		<br />
-		<p>Stop words are words that do not add a lot of meaning to the text such as “the”, “it”, “as” and “about”.  They may also include words that are often used sarcastically.  This means that they may have their true meaning or the opposite meaning.  Hence, they are removed.</p>
+			<img src="../static/img/bagofwords2.jpeg" class="img-rounded img-responsive center-block" alt="Cleaning" width="300" height="250" />
 
-		<h4>What is Lemmatization?</h4>
-		<img src="../static/img/lemmatization1.png" class="img-rounded img-responsive center-block" alt="Lemmatization" width="500" height="100" />
-		<p>The same word may come in many forms, such as: “eat”, “ate”, “eaten”, etc.  All of these words can be normalized to what are called lemmas so that they are not treated as separate tokens, but as the same token.</p>
+			<p>Here are the fifteen most predictive words and their percentages for the current model.</p>
 
-		<h2>Making the Featureset</h2>
-		<hr />
-		<p>We used a bag of words model in which the featureset was the presence or absence of the 3000 most commonly found words in the text.</p>
+			<table>
+				<tr>
+					<th>Feature</th>
+					<th>Sentiment</th>
+					<th>Certainty</th>
+				</tr>
+				{% for i in range(output_string_to_list | length) %}
+				 	{% if i % 10 == 0 %}
+				 		<tr> 
+							<td>{{ output_string_to_list[i][0] | upper }}{{ output_string_to_list[i][1:] }}</td>
+					{% endif %}
+					{% if i % 10 == 3 %}
+						
+							<td>{% if output_string_to_list[i] == "pos" %} Positive {% else  %} Negative {% endif %}</td>
+					{% endif %}
+					{% if i % 10 == 7 %}
+							<td>{{ output_string_to_list[i] }}%</td>
+						</tr>
+					{% endif %}
 
-		<h3>Labeled Data</h3>
-		<hr />
-		<img src="../static/img/labeleddata1.png" class="img-rounded img-responsive center-block" alt="Stop Words" width="500" height="100"/>
-		<p>Now that we have finished the processing to normalize the data, we need to create our labeled data set.  Only reviews of food products from Amazon that were rated as five stars or one star were used.  One star reviews were labeled as negative and five star reviews were labeled as positive.</p>
-		<p>Additionally, there were a great deal more positive reviews than negative reviews so 1000 of each type were randomly selected to ensure there was no bias in the model.</p>
-		<img src="../static/img/labeleddata2.png" class="img-rounded img-responsive center-block" alt="Stop Words" width="500" height="100" />
-		<br />
-		<p>Choose a new feature set by pressing the button.  <br />
-			Note: This will change the statistics about the current model below!  <strong>And it may take several minutes to complete!</strong></p>
-		<form method="POST" action="" >
-			{{ form.hidden_tag() }}
-			{{ form.submit(class="btn btn-primary center-block") }}
-		</form>
+				{% endfor %}
+			</table>
+		</div>
+		<br /> <br />
+		<div class="dbp dbc">
+			<h3>Naive Bayes Classifier</h3>
+			<hr />
+			<h5>Current model accuracy: <strong>{{ accuracy }}%</strong></h5>
+			<br />
 
-		<h3>Bag of Words Model</h3>
-		<hr />
-
-		<p>A Python dictionary is used to hold the feature set, which denotes the presence or absence of the 3000 most common words in all of the reviews.  Each of the reviews is converted into a dictionary with 3000 entries.  Each dictionary key is a one of the 3000 most common words and the value is the boolean value of true or false corresponding to whether or not the review contains the word.</p>
-
-		<img src="../static/img/bagofwords1.png" class="img-rounded img-responsive center-block" alt="Cleaning" width="300" height="250" />
-
-		<p>Here are the words that are the most predictive for our current model.</p>
-
-		<table>
-			<tr>
-				<th colspan="10">Most informative Features (Lemmas)</th>
-			</tr>
-			{% for i in range(features | length) %}
-			 	{% if i % 10 == 0 %}<tr> {% endif %}
-					<td>{{ features[i][0] }}</td>
-				{% if i+9 % 10 == 0 %}</tr> {% endif %}
-			{% endfor %}
-		</table>
-
-		<br />
-
-		<p>This is referred to as a “bag of words” model because of the fact that the feature set does not take into account the order of the words, only the presence or absence of each word.  For instance, it is very different to say “The meat is good.  It is not bad” versus “The meat is bad.  It is not good.”  However, this difference is not taken into account in our model which only takes into account what words are present, not their order.</p>
-
-		<img src="../static/img/bagofwords2.jpeg" class="img-rounded img-responsive center-block" alt="Cleaning" width="300" height="250" />
-
-		<p>Here are the fifteen most predictive words and their percentages for the current model.</p>
-
-		<table>
-			<tr>
-				<th>Feature</th>
-				<th>Sentiment</th>
-				<th>Certainty</th>
-			</tr>
-			{% for i in range(output_string_to_list | length) %}
-			 	{% if i % 10 == 0 %}
-			 		<tr> 
-						<td>{{ output_string_to_list[i][0] | upper }}{{ output_string_to_list[i][1:] }}</td>
-				{% endif %}
-				{% if i % 10 == 3 %}
-					
-						<td>{% if output_string_to_list[i] == "pos" %} Positive {% else  %} Negative {% endif %}</td>
-				{% endif %}
-				{% if i % 10 == 7 %}
-						<td>{{ output_string_to_list[i] }}%</td>
-					</tr>
-				{% endif %}
-
-			{% endfor %}
-		</table>
-
-		<h3>Naive Bayes Classifier</h3>
-		<hr />
-		<h5>Current model accuracy: <strong>{{ accuracy }}%</strong></h5>
-		<br />
-
-		<p>Now that we have dictionaries of training data we need to understand the model that we selected.  We are going to use a Naive Bayes classifier in order to make our predictions.</p>
-		<img src="../static/img/nb1.jpg" class="img-rounded img-responsive center-block" alt="Cleaning" width="300" height="250" />
-		<h4>A Simple Example</h4>
-		<p>This formula can be explained in the following example.  Imagine we draw a card randomly from a deck of cards.  We know that a face card was drawn.  We would like to calculate the probability that that card is a queen.  Given the formula above, we can caculate this as P(Queen | Face) = P(Face | Queen) * P(Queen) / P(Face).</p>
-		<img src="../static/img/queens1.jpg" class="img-rounded img-responsive center-block" alt="Cleaning" width="300" height="250" />
-		<br />
-		<p>Clearly P(Face | Queen) is 1 because all queens are face cards.  The probability that a queen was chosen is 4/52 because there are four queens in a deck of 52.  This can be reduced to 1/13.  P(Face) is 12/52 because there are 3 cards * 4 suits = 12.  12/52 can be reduced to 3/13.</p>
-		<p>Hence, we have P(Queen | Face) = 1 * (1/13) / (3/13) = (1/13) * (13/3) = 1/3 which is clearly correct (4 Queens out of 12 Face cards = 4/12 or 1/3).</p>
-		<h4>NLP Example</h4>
-		<p>We are making a sentiment analyzer which means that we would like the algorithm to be able to classify text as positive or negative.  In other words, given a string of text, we would like to know the probability the string of text is positive or negative.  A specific example of this may be a sentence like, "Fake meat is delicious".  We will do this by comparing P(Positive | Fake meat is delicious) to P(Negative | Fake meat is delicious).</p>
-		<img src="../static/img/fakemeat1.jpg" class="img-rounded img-responsive center-block" alt="Cleaning" width="500" height="250" />
-		<br />
-		<p>Let's stick with only the positive example as the negative example is calculated in a similar fashion.  This can be calculated using the bayes formula in the following way P(Positive | Fake meat is delicious) = P(Fake meat is delcious | Positive) * P(Positive) / P(Fake meat is delicious).  However, this the sentence "Fake meat is delicious" may not be in our dataset, so how can we calculate the probability of it?</p>
-		<h4><strong>Naive</strong> Bayes</h4>
-		<p>This is where the naive part of classifier comes into play.  Since we do not have data on every sentence possible, we are just going to calculate the probability of each individual word and multiply them together, meaning: P(Positive | fake) * P(Positive | meat) * P(Positive | delicious) (Note: data normalized and stop word deleted).  We will certainly have data on all or some of these words.</p>
-		<img src="../static/img/sentimentanalysis2.png" class="img-rounded img-responsive center-block" alt="Cleaning" width="500" height="250" />
-		<p>The final thing we do is just calculate out our probabilities and then multiply them together.  (These probabilities are calculated using the same formula.  There are many sources online that explain the specific details of how this is done.  This article is meant for a general understanding and not specific calculations.)</p>
-		<img src="../static/img/sentimentanalysis1.jpg" class="img-rounded img-responsive center-block" alt="Cleaning" width="500" height="250" />
+			<p>Now that we have dictionaries of training data we need to understand the model that we selected.  We are going to use a Naive Bayes classifier in order to make our predictions.</p>
+			<img src="../static/img/nb1.jpg" class="img-rounded img-responsive center-block" alt="Cleaning" width="300" height="250" />
+			<h4>A Simple Example</h4>
+			<p>This formula can be explained in the following example.  Imagine we draw a card randomly from a deck of cards.  We know that a face card was drawn.  We would like to calculate the probability that that card is a queen.  Given the formula above, we can caculate this as P(Queen | Face) = P(Face | Queen) * P(Queen) / P(Face).</p>
+			<img src="../static/img/queens1.jpg" class="img-rounded img-responsive center-block" alt="Cleaning" width="300" height="250" />
+			<br />
+			<p>Clearly P(Face | Queen) is 1 because all queens are face cards.  The probability that a queen was chosen is 4/52 because there are four queens in a deck of 52.  This can be reduced to 1/13.  P(Face) is 12/52 because there are 3 cards * 4 suits = 12.  12/52 can be reduced to 3/13.</p>
+			<p>Hence, we have P(Queen | Face) = 1 * (1/13) / (3/13) = (1/13) * (13/3) = 1/3 which is clearly correct (4 Queens out of 12 Face cards = 4/12 or 1/3).</p>
+			<h4>NLP Example</h4>
+			<p>We are making a sentiment analyzer which means that we would like the algorithm to be able to classify text as positive or negative.  In other words, given a string of text, we would like to know the probability the string of text is positive or negative.  A specific example of this may be a sentence like, "Fake meat is delicious".  We will do this by comparing P(Positive | Fake meat is delicious) to P(Negative | Fake meat is delicious).</p>
+			<img src="../static/img/fakemeat1.jpg" class="img-rounded img-responsive center-block" alt="Cleaning" width="500" height="250" />
+			<br />
+			<p>Let's stick with only the positive example as the negative example is calculated in a similar fashion.  This can be calculated using the bayes formula in the following way P(Positive | Fake meat is delicious) = P(Fake meat is delcious | Positive) * P(Positive) / P(Fake meat is delicious).  However, this the sentence "Fake meat is delicious" may not be in our dataset, so how can we calculate the probability of it?</p>
+		</div>
+		<br /> <br />
+		<div class="dbp">
+			<h4><strong>Naive</strong> Bayes</h4>
+			<p>This is where the naive part of classifier comes into play.  Since we do not have data on every sentence possible, we are just going to calculate the probability of each individual word and multiply them together, meaning: P(Positive | fake) * P(Positive | meat) * P(Positive | delicious) (Note: data normalized and stop word deleted).  We will certainly have data on all or some of these words.</p>
+			<img src="../static/img/sentimentanalysis2.png" class="img-rounded img-responsive center-block" alt="Cleaning" width="500" height="250" />
+			<p>The final thing we do is just calculate out our probabilities and then multiply them together.  (These probabilities are calculated using the same formula.  There are many sources online that explain the specific details of how this is done.  This article is meant for a general understanding and not specific calculations.)</p>
+			<img src="../static/img/sentimentanalysis1.jpg" class="img-rounded img-responsive center-block" alt="Cleaning" width="500" height="250" />
+		</div>
 
 
 
