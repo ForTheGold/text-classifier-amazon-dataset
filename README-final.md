@@ -67,7 +67,7 @@ https://drive.google.com/file/d/1dmxUiRXfJX1dMDdqdZdfr-iHuozO44Q1/view?usp=shari
 
 ### Image of ERD describing database tables
 
-![QuickDBD5.PNG](Resources/QuickDBD5.PNG)
+![QuickDBD5.png](Resources/QuickDBD5.png)
 
 
 ### Images of Database Tables in Table Plus:
