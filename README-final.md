@@ -159,11 +159,6 @@ A Naive Bayes classifier was used to train the model.  The Bayes model works on 
   
 We then make our naive assumption.  Rather than calculating the full review text, we calculate each of the words in the review and multiply the probabilities together.  For example, rather than calculating P(fake meat is disgusting | Positive) we would calculate P(fake | Positive) * P(meat | Positive) * P(disgusting | Positive) (Stop word removed).  We do the same for the negative probability and then decide which is larger.  This is how the algorithm classifies reviews.
 
-### Interactive Website/Dashboard
-
-https://photos.app.goo.gl/tDgAHE3kvvM9URMa9
-
-
 ## Visualizations
 ### Price v. Year
 ![Price v. Year](images/pricevyr.png)
@@ -173,9 +168,11 @@ https://photos.app.goo.gl/tDgAHE3kvvM9URMa9
 ![Review v. Price per Year by Brand](images/rvwvprice.png)
 
 ## Presentation
-A copy of the draft slides has been uploaded to our repository.  You can also link to the presentation here ![Final_Presentation.PPT](Final_Presentation.PPT).
+A copy of the draft slides has been uploaded to our repository.  You can also link to the presentation here [Final_Presentation.PPT](Final_Presentation.pptx).
 
-## Dashboard
+## Interactive Website/Dashboard
+
+https://photos.app.goo.gl/tDgAHE3kvvM9URMa9
 
 The dashboard consists of eight pages that demostrate the work that we have put into this project.  These pages include:
 
