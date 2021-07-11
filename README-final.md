@@ -1,6 +1,6 @@
 # Project One - Artificial Meat Review Predictions
 
-### Group Three Members 
+### Group #3 Members 
  - Tamar Brand-Perez
  - Tiffany Price
  - Ben Tubbs
@@ -12,13 +12,13 @@ The topic of our project involves artificial meat review predictions.
 
 ## The Why
 
-We selected this topic because the artificial meat industry is becoming increasingly popular as of late.  We find it the industry very interesting and want to understand how consumer experience and resulting reviews can predict ratings. After pulling and cleaning our data set from Amazon, we used the Natural Language Processing machine learning model to train a sentiment classifier. During the cleaning process, both five and one star reviews will be maintained, while two, three and four star ratings will be removed.  Next, we will pull reviews without ratings and direct the machine to predict the ratings based on the analysis of the reviews.  
+We selected this topic because the artificial meat industry is becoming increasingly popular as of late.  We find the industry very interesting and want to understand how consumer experience and resulting reviews can predict ratings. After pulling and cleaning our data set from Amazon, we used the Natural Language Processing machine learning model to train a sentiment classifier. During the cleaning process, both five and one star reviews were maintained, while two, three and four star ratings were removed.  Next, we pulled reviews without ratings and directed the machine to predict the ratings based on its analysis of the reviews.  
 
 ## Data Source
 
 We used three main sources of data:
 
-- Our initial dataset was pulled from the Amazon Grocery and Gourmet Food section from the computer science lab website of Dr.Jianmo Ni, at UCSD (http://deepyeti.ucsd.edu/jianmo/amazon/index.html). This dataset was of groceries. 
+- Our initial dataset was pulled from the Amazon Grocery and Gourmet Food section from the computer science lab website of Dr. Jianmo Ni, at UCSD (http://deepyeti.ucsd.edu/jianmo/amazon/index.html). This dataset was of groceries. 
 - We scraped Amazon's website. This data included fake meat brands only. 
 - We scraped Reddit reviews. This data was of fake meat reviews only as well. 
 
@@ -31,7 +31,7 @@ We used three main sources of data:
 
 We wanted a dataset that had all of the columns mentioned in the image above and most importantly, the review text as well as the product and price information because we wanted to focus only on fake meat reviews. Since the dataset from UCSD had groceries reviews but no product and brand information, we tried to merge it with the metadata that was supposed to belong to it. 
 
-The general groceries dataset from UCSD had more than 5 million reviews. After cleaning the data we had more than 1 million reviews. The metadata had a similar number initially but after choosing only the fake meat reviews, the metadata set had only 116 reviews. Then when we merged the UCSD Amazon data with the metadata we were left with only 12 rows. We tried many different variations of merge, join, concatinate, with an inner, outer, left joins with no success. The only common column in these datasets was the asin which is the Amazon’s product number. When we looked further into the data we found that the asin in one of the datasets was made of letters and digits and the other one was digits only so this explained why the merging of these datasets did not work. 
+The general groceries dataset from UCSD had more than 5 million reviews. After cleaning the data we had more than 1 million reviews. The metadata had a similar number initially but after choosing only the fake meat reviews, the metadata set had only 116 reviews. Then when we merged the UCSD Amazon data with the metadata we were left with only 12 rows. We tried many different variations of merge, join, concatenate, with an inner, outer, left joins with no success. The only common column in these datasets was the asin which is the Amazon’s product number. When we looked further into the data we found that the asin in one of the datasets was made of letters and digits and the other one was digits only so this explained why the merging of these datasets did not work. 
 
 So we decided to shift to scraped data from Amazon website. When scraping we had to input multiple url’s to get the data. We got all the necessary information and used it for visualizations. 
 Scraped data was specifically about fake meat products. 
@@ -41,7 +41,7 @@ The reddit reviews did not have star ratings. We scraped the reddit reviews abou
 
 ## Data Cleaning
 
-We dropped columns that were not relevant for our goal:(columns that were dropped were: verified, reviewer name, summary of the review text, unix review time,(vote, image and style - had little data in them)).
+We dropped columns that were not relevant for our goal:(columns that were dropped were: verified, reviewer name, summary of the review text, unix review time, (vote, image and style - had little data in them)).
 
 We added the review length column because we were going to find out if there was a connection between the length of a review and its sentiment (We ended up not using that). This column showed the number of words in each review. 
 
@@ -54,7 +54,7 @@ We trimmed the 5 star reviews from more than 3 million reviews to 600,000 to mat
 
 We used Sqlite and sqlalchemy to create the database. This was a local database that is suitable for the development stage of a project. 
 We interacted with the database using python, and table plus. 
-Below is an image of the ERD we created, showing the tables in the database. The first one is the data from UCSD Amazon general groceries. (we did not include the metadata because we ended up not using it.) The three in the middle are from the Amazon scraped data. The first one is of the brands. The second is the products. Since each brand has several products, the connection is one to many. Since each product has multiple reviews the connection between the product and the review table was also one to many. Lastly we have the reddit thread table with Reddit reviews. 
+Below is an image of the ERD we created, showing the tables in the database. The first one is the data from UCSD Amazon general groceries. (We did not include the metadata because we ended up not using it.) The three in the middle are from the Amazon scraped data. The first one is of the brands. The second is the products. Since each brand has several products, the connection is one to many. Since each product has multiple reviews the connection between the product and the review table was also one to many. Lastly we have the reddit thread table with Reddit reviews. 
 
 
 ## Link to the data files:
@@ -70,35 +70,35 @@ https://drive.google.com/file/d/1dmxUiRXfJX1dMDdqdZdfr-iHuozO44Q1/view?usp=shari
 ![QuickDBD5.PNG](Resources/QuickDBD5.PNG)
 
 
-### images of database tables in table plus:
+### Images of Database Tables in Table Plus:
 
-#### groceries_review_table
+#### Groceries review Table
 
 ![groceries_review_table.PNG](Resources/groceries_review_table.PNG)
 
 
-#### brand_table
+#### Brand Table
 
 ![brand_table.PNG](Resources/brand_table.PNG)
 
 
-#### product_table
+#### Product Table
 
 ![product_table.PNG](Resources/product_table.PNG)
 
 
-#### review_table
+#### Review Table
 
 ![review_table.PNG](Resources/review_table.PNG)
 
 
-#### reddit_thread table
+#### Reddit Thread Table
 
 ![reddit_thread.PNG](Resources/reddit_thread.PNG)
 
 
 
-### Image of join query on table plus
+### Image of Join Query on Table Plus
 
 ![join.PNG](Resources/join.PNG)
 
@@ -145,7 +145,7 @@ All tokens that were less than two characters in length were removed.
   
 Stop words are words such as "in", "for", "that", and "the" which do not add a lot of meaning to the text.  Stop words were also removed.  
   
-The words were them lemmatized which means that the same words of different forms were normalized to the same form.  An example of this would be words like "eat", "eats", "ate" and "eaten" are all normalzed to "eat".
+The words were them lemmatized which means that the same words of different forms were normalized to the same form.  An example of this would be words like "eat", "eats", "ate" and "eaten" are all normalized to "eat".
 
 ### Feature Set
 
@@ -155,14 +155,9 @@ Next, we shuffled the positive reviews and created a list of 1000 positive and 1
 
 ### Machine Learning
 
-A Naive Bayes classifier was used to train the model.  The Bayes model works on the equation P(A | B) = P(B | A) * P(A) / P(B).  The algorithm works by taking in the labeled data and slowly moving each of the words more positive if the word appears in a positive review and more negative if the word appears in a negative review.  At the end of this training, the alogrithm is left with percentages for how positive or negative each word is.  
+A Naive Bayes classifier was used to train the model.  The Bayes model works on the equation P(A | B) = P(B | A) * P(A) / P(B).  The algorithm works by taking in the labeled data and slowly moving each of the words more positive if the word appears in a positive review and more negative if the word appears in a negative review.  At the end of this training, the algorithm is left with percentages for how positive or negative each word is.  
   
-We then make our naive assumption.  Rather than calculating the full review text, we calculate each of the words in the review and multiply the probabilities together.  For example, rather than caluclating P(fake meat is disgusting | Positive) we would calculate P(fake | Positive) * P(meat | Positive) * P(disgusting | Positive) (Stop word removed).  We do the same for the negative probability and then decide which is larger.  This is how the algorithm classifies reviews.
-
-### Interactive Website/Dashboard
-
-LINK WEBSITE OR ADD SCREENSHOTS ESPECIALLY OF INTERACTIVE PORTIONS
-
+We then make our naive assumption.  Rather than calculating the full review text, we calculate each of the words in the review and multiply the probabilities together.  For example, rather than calculating P(fake meat is disgusting | Positive) we would calculate P(fake | Positive) * P(meat | Positive) * P(disgusting | Positive) (Stop word removed).  We do the same for the negative probability and then decide which is larger.  This is how the algorithm classifies reviews.
 
 ## Visualizations
 ### Price v. Year
@@ -171,10 +166,13 @@ LINK WEBSITE OR ADD SCREENSHOTS ESPECIALLY OF INTERACTIVE PORTIONS
 ![Rating v. Year](images/ratingvyr.png)
 ### Review v. Price per Year by Brand
 ![Review v. Price per Year by Brand](images/rvwvprice.png)
-## Presentation
-A copy of the draft slides has been uploaded to our repository.  You can also link to the presentation here ADD LINK
 
-## Dashboard
+## Presentation
+A copy of the draft slides has been uploaded to our repository.  You can also link to the presentation here [Final_Presentation.PPT](Final_Presentation.pptx).
+
+## Interactive Website/Dashboard
+
+https://photos.app.goo.gl/tDgAHE3kvvM9URMa9
 
 The dashboard consists of eight pages that demostrate the work that we have put into this project.  These pages include:
 
@@ -183,7 +181,7 @@ The dashboard consists of eight pages that demostrate the work that we have put 
 * Machine Learning Model
 * Amazon Review Scraper
 * Reddit Thread Scraper
-* Review Classsifier
+* Review Classifier
 * Visualizations
 * Presentation
 
@@ -205,11 +203,11 @@ This page allows the user to enter an Amazon product page and then it will scrap
 
 ### Reddit Thread Scraper
 
-This page allows the user to enter a Reddit thread.  The comments will be scraped from the thread and classified by the alogrithm.  Statistics are then calculated about the thread such as the number of reviews, the number of positive and negative reviews as well as the percentage of positive and negative reviews.
+This page allows the user to enter a Reddit thread.  The comments will be scraped from the thread and classified by the algorithm.  Statistics are then calculated about the thread such as the number of reviews, the number of positive and negative reviews as well as the percentage of positive and negative reviews.
 
-### Review classifier
+### Review Classifier
 
-The next page allows the user to enter in any text that he or she would like and the algoirthm will classify it and display the text as well as the classification.
+The next page allows the user to enter in any text that he or she would like and the algorithm will classify it and display the text as well as the classification.
 
 ### Visualizations
 
@@ -230,7 +228,7 @@ Finally, from the word clouds and the table analysis of the reviews, the stakeho
 The limitations we experienced during our analysis include:
  - Our time frame was rushed; as were learning about the limitations of our data set, we were already using it. 
  - Since our initial data set was limited, we were not necessarily focused on the best data set available.  We operated with what we had and made the most of it due to time and resource constraints, including but not limited to, computer capacity and also eventually being blocked by Amazon during our web scraping.
- - Finally, the algorithm does not consider the order of words (ie food tastes great v great tasting food).
+ - Finally, the algorithm does not consider the order of words (ie food is bad not good v food is good not bad).
 
 #### Further Analysis
 If we were to continue future analysis, we would:
