@@ -161,7 +161,7 @@ We then make our naive assumption.  Rather than calculating the full review text
 
 ### Interactive Website/Dashboard
 
-LINK TO VIDEO
+https://photos.app.goo.gl/tDgAHE3kvvM9URMa9
 
 
 ## Visualizations
@@ -171,6 +171,7 @@ LINK TO VIDEO
 ![Rating v. Year](images/ratingvyr.png)
 ### Review v. Price per Year by Brand
 ![Review v. Price per Year by Brand](images/rvwvprice.png)
+
 ## Presentation
 A copy of the draft slides has been uploaded to our repository.  You can also link to the presentation here ![Final_Presentation.PPT](Final_Presentation.PPT).
 
