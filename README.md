@@ -201,33 +201,51 @@ The dashboard consists of eight pages that demostrate the work that we have put 
 
 ### Project Page
 
+![Project Page](https://github.com/ForTheGold/project-one/blob/main/Resources/site1.png)
+
 The project page gives and overview of the project, the questions to be answered, and the goals of the project.
 
 ### Database Page
+
+![Database Page](https://github.com/ForTheGold/project-one/blob/main/Resources/site2.png)
 
 The database page includes information about where the data was collected from as well as how it was stored in the database.
 
 ### Machine Learning Model
 
+![Machine Learning Page1](https://github.com/ForTheGold/project-one/blob/main/Resources/site3.png)
+
+![Machine Learning Page2](https://github.com/ForTheGold/project-one/blob/main/Resources/site4.png)
+
 The machine learning page includes information about the preprocessing of the data, the featureset creation, the training of the model, and the way in which the model predicts information.  This is the first page with an interactive feature which allows the user to use an alternate sample to train the model.  All of the tables on this page as well as the accuracy will be updated dynamically based upon the new sample of data.
 
 ### Amazon Review Scraper
+
+![Amazon Page](https://github.com/ForTheGold/project-one/blob/main/Resources/site5.png)
 
 This page allows the user to enter an Amazon product page and then it will scrape some information about the product such as the title and price as well as the first few pages of reviews.  The reviews will also be classified by the algorithm and the classification displayed in a table.
 
 ### Reddit Thread Scraper
 
+![Reddit Page](https://github.com/ForTheGold/project-one/blob/main/Resources/site6.png)
+
 This page allows the user to enter a Reddit thread.  The comments will be scraped from the thread and classified by the algorithm.  Statistics are then calculated about the thread such as the number of reviews, the number of positive and negative reviews as well as the percentage of positive and negative reviews.
 
 ### Review Classifier
+
+![Review Classifier Page](https://github.com/ForTheGold/project-one/blob/main/Resources/site7.png)
 
 The next page allows the user to enter in any text that he or she would like and the algorithm will classify it and display the text as well as the classification.
 
 ### Visualizations
 
+![Visualizations Page](https://github.com/ForTheGold/project-one/blob/main/Resources/site8.png)
+
 The next page contains an interactive image carousel of several of the visualizations that we created throughout the completion of the project.
 
 ### Presentation
+
+![Presentation Page](https://github.com/ForTheGold/project-one/blob/main/Resources/site9.png)
 
 The final page shows the presentation, and it is downloadable as a PDF or PPTX document.
 
