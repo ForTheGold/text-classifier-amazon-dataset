@@ -35,7 +35,7 @@
 			<div class="dbp">
 				<h3>Data Content</h3>
 					<hr />
-					<img src="../static/img/data_content.PNG" class="dbi" width="1000" height="500" />
+					<img src="../static/img/data_content.PNG" class="center-block" width="1000" height="500" />
 					<br /><br />
 					<p>The goal was to use a dataset that had all of the columns mentioned in the image above and most importantly, the review text as well as the product and price information in order to focus only on fake meat reviews. Since the dataset from UCSD had groceries reviews but no product and brand information, merging the Amazon groceries with the metadata would resolve this issue.  </p>
 					<p>The general groceries dataset from UCSD had more than 5 million reviews. After cleaning the data there were more than 1 million reviews. The metadata had a similar number initially but after choosing only the fake meat reviews, the metadata set had only 116 reviews. Merging the UCSD Amazon data with the metadata left with only 12 rows. Many different variations of merge, join, concatinate, with an inner, outer, left joins were not successful. The only common column in these datasets was the asin which is the Amazon’s product number. Further investigation revealed that the asin in one of the datasets was made of letters and digits and the other one was digits only so this explained why the merging of these datasets did not work.  </p>
@@ -67,7 +67,7 @@
 						We interacted with the database using python, and table plus. 
 						Below is an image of the ERD we created, showing the tables in the database. The first one is the data from UCSD Amazon general groceries. (the metadata is not included because we ended up not using it.) The three in the middle are from the Amazon scraped data. The first one is of the brands. The second is the products. Since each brand has several products, the connection is one to many. Since each product has multiple reviews the connection between the product and the review table was also one to many. Lastly the reddit thread table with Reddit reviews. </p>
 					<br /><br />
-					<img src="../static/img/QuickDBD5.png" class="dbi" width="1000" height="550" alt="Responsive image"/>
+					<img src="../static/img/QuickDBD5.png" class="center-block" width="1000" height="550" alt="Responsive image"/>
 				
 				
 		</div>
