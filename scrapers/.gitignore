@@ -1,6 +1,5 @@
 reviewdb_old.db
 reviewdb.db
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
