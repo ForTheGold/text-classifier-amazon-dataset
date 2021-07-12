@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block content %}
+	<div class="container">
+		<div class="jumbotron">
+			<div class="row">
+	        	<div class="col-md-7">
+					<h1>Presentation</h1>
+					<p>Here are the presentation slides from our data</p>
+				</div>
+				<div class="col-md-5">
+					<img src="../static/img/fakemeat1.jpg" class="img-rounded" alt="Fake Meat" width="300" height="200"/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+        	<div class="col-md-1">
+        	</div>
+        	<div class="col-md-5">
+				<embed src="../static/files/pres.pdf"width="1000px" height="1000px" />
+			</div>
+			<div class="col-md-1">
+        	</div>
+        </div>
+	</div>
+	<br />
+	<br />
+	<div class="container">
+		<a href="../static/files/pres.pdf">Download presentation as PDF</a>
+		<br />
+		<a href="../static/files/pres.pptx">Download presentation as PPTX</a>
+	</div>
+	<br />
+	<br />
+{% endblock content %}
