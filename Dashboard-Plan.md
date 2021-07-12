@@ -43,7 +43,7 @@ Will use scraping data from 5 different brands to generate figures for dashboard
 
 Decided to create three template visualizations: 
 1. Word cloud to show 10 most frequent used words in negative and positive reviews per brand:
-![](/Resources/Boca-BYM-neg.PNG)
+ ![](/Resources/Boca-BYM-neg.PNG)
 
 ![](/Resources/BYM-pos-neg.PNG)
 
