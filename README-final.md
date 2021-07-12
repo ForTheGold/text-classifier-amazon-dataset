@@ -1,4 +1,4 @@
-# Project One - Artificial Meat Review Predictions
+# Project One - Where's the Beef?
 
 ### Group #3 Members 
  - Tamar Brand-Perez
@@ -10,9 +10,15 @@
 
 The topic of our project involves artificial meat review predictions.  
 
-## The Why
+## Introduction
 
-We selected this topic because the artificial meat industry is becoming increasingly popular as of late.  We find the industry very interesting and want to understand how consumer experience and resulting reviews can predict ratings. After pulling and cleaning our data set from Amazon, we used the Natural Language Processing machine learning model to train a sentiment classifier. During the cleaning process, both five and one star reviews were maintained, while two, three and four star ratings were removed.  Next, we pulled reviews without ratings and directed the machine to predict the ratings based on its analysis of the reviews.  
+Per Fortune Business Insights, the global population is projected to reach 9.8 billion in 2050; it is not feasible to sustain such an enormous population on animal meat alone (https://www.fortunebusinessinsights.com/industry-reports/meat-substitutes-market-100239).  One of the most significant wake up calls is related to the pandemic.  According to the NYT, farmers and ranchers who supply the nation with meat products were confronted with several crises at once: for example, during 2020, large processing plants shut down as workers fell ill as a result of COVID, and many producers were already strained by the trade war with China.  A larger concern is around global warming; the meat business has been under growing scrutiny in recent years for its climate change consequences, with scientists and environmentalists urging Americans to eat less meat (https://www.nytimes.com/2020/04/17/climate/meat-industry-climate-impact.html).
+The plant-based meat market was estimated to be valued at $4.3 billion in 2020 (https://www.marketsandmarkets.com/Market-Reports/plant-based-meat-market-44922705.html) and could be a $450 billion market by 2040 (https://www.bloomberg.com/news/articles/2021-04-16/beyond-meat-bynd-impossible-foods-battle-over-future-of-fake-meat-industry).    
+
+### Overview
+
+The fake meat industry has recently experienced a dramatic shift in positive user sentiment. We wanted to explore this concept to ultimately provide stakeholders with the information and tools to assist them in determining which artificial meat brand to sell.  
+We feel passionately about the subject and hope that our efforts will aid in increasing the awareness and sales of artificial meat products.
 
 ## Data Source
 
