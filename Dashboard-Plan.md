@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 # Week 1 - Possible Visualizations in Dashboard
 
 1. Analysis of distribution of positive and negative reviews based on number words in review (TRAINING SET versus PREDICTION SET;  number of words (x-axis) vs number of positive reviews)
